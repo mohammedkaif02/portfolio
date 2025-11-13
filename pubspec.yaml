@@ -79,8 +79,6 @@ flutter:
     - assets/icons/
     - assets/Project_Image/
     - assets/pdf/
-    - assets/Project_Image/bg_video.gif
-    - assets/Project_Image/contact.png
     #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
