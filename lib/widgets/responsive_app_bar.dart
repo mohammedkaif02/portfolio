@@ -12,12 +12,9 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-
     return LayoutBuilder(
       builder: (context, constraints) {
         bool isMobile = constraints.maxWidth < 800; // Mobile breakpoint
-
         return Obx(() {
           return AppBar(
             surfaceTintColor: Colors.transparent,
@@ -26,52 +23,31 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
             backgroundColor:
                 controller.toggle.value == true
                     ? Colors.white
-                    : Color(0xffff111827),
-            // backgroundColor: Colors.transparent.withOpacity(.6),
+                    : Color(0xff111827),
             toolbarHeight: 80,
-            leadingWidth: isMobile ? null : width * 0.2,
             leading:
                 isMobile
                     ? IconButton(
                       icon: Icon(Icons.menu, color: primaryColor),
                       onPressed: () => Scaffold.of(context).openDrawer(),
                     )
-                    : SizedBox(width: width * .2),
+                    : SizedBox(),
             title:
                 isMobile
                     ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(),
                         MyText(
                           text: "Portfolio",
                           fontWeight: FontWeight.bold,
                           fontSize: 26,
                           textColor: primaryColor,
                         ),
-                        Obx(() {
-                          return LightDarkThemeToggle(
-                            value: controller.toggle.value,
-                            onChanged: (onChanged) {
-                              controller.toggleTheme();
-                            },
-                            tooltip:
-                                controller.toggle.value == true
-                                    ? "DarkMode"
-                                    : "LightMode",
-                            color:
-                                controller.toggle.value == true
-                                    ? Colors.black87
-                                    : Colors.yellow.shade300,
-                          );
-                        }),
                       ],
-                    ) // Hide navigation items in AppBar for mobile
+                    )
                     : Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        // Text("Mohammed Kaif",style: TextStyle(color: Colors.white),),
-                        // Spacer(),
                         _navItem(
                           "Home",
                           () => controller.scrollToSection(
@@ -107,28 +83,46 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
                             "Contact",
                           ),
                         ),
-                        Obx(() {
-                          return LightDarkThemeToggle(
-                            value: controller.toggle.value,
-                            onChanged: (onChanged) {
-                              controller.toggleTheme();
-                            },
-                            tooltip:
-                                controller.toggle.value == true
-                                    ? "DarkMode"
-                                    : "LightMode",
-                            color:
-                                controller.toggle.value == true
-                                    ? Colors.black87
-                                    : Colors.yellow.shade300,
-                          );
-                        }),
                       ],
                     ),
             actions:
                 isMobile
-                    ? [SizedBox(width: width * 0.15)]
-                    : [SizedBox(height: 70, width: width * 0.2)],
+                    ? [
+                      Obx(() {
+                        return LightDarkThemeToggle(
+                          value: controller.toggle.value,
+                          onChanged: (onChanged) {
+                            controller.toggleTheme();
+                          },
+                          tooltip:
+                              controller.toggle.value == true
+                                  ? "DarkMode"
+                                  : "LightMode",
+                          color:
+                              controller.toggle.value == true
+                                  ? Colors.black87
+                                  : Colors.yellow.shade300,
+                        );
+                      }),
+                    ]
+                    : [
+                      Obx(() {
+                        return LightDarkThemeToggle(
+                          value: controller.toggle.value,
+                          onChanged: (onChanged) {
+                            controller.toggleTheme();
+                          },
+                          tooltip:
+                              controller.toggle.value == true
+                                  ? "DarkMode"
+                                  : "LightMode",
+                          color:
+                              controller.toggle.value == true
+                                  ? Colors.black87
+                                  : Colors.yellow.shade300,
+                        );
+                      }),
+                    ],
           );
         });
       },

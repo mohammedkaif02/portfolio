@@ -12,8 +12,6 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var width = MediaQuery.of(context).size.width;
-    // var height = MediaQuery.of(context).size.height;
     return Responsive(
       mobile: Container(
         key: controller.aboutUsKey,
@@ -21,7 +19,6 @@ class About extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // ===== Heading =====
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Column(
@@ -29,7 +26,7 @@ class About extends StatelessWidget {
                   MyText(
                     text: "About",
                     fontSize: 40,
-                    textColor: Theme.of(context).colorScheme.onBackground,
+                    textColor: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.bold,
                   ),
                   Container(
@@ -57,35 +54,30 @@ class About extends StatelessWidget {
 
             Padding(
               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-              // width: 700,
               child: MyText(
                 text:
                     "I’m Mohammed Kaif, a passionate Flutter Developer with over a year of experience building cross-platform mobile and web apps that are fast, scalable, and beautifully designed. I specialize in Flutter, Dart, and Node.js, and work with Firebase, REST APIs, and CI/CD pipelines to deliver seamless, production-ready solutions.",
-                textColor: Theme.of(context).colorScheme.onBackground,
+                textColor: Theme.of(context).colorScheme.secondary,
                 textAlign: TextAlign.justify,
                 fontSize: 14,
               ),
             ),
-            // const SizedBox(height: 20),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-              // width: 700,
               child: MyText(
                 text:
                     "At Spin Info Solutions, I’ve helped build user-focused apps that run smoother, deploy faster, and perform better. I believe great products are born from a balance of creativity, clean architecture, and attention to detail and that’s what I aim for in every project.",
-                textColor: Theme.of(context).colorScheme.onBackground,
+                textColor: Theme.of(context).colorScheme.secondary,
                 textAlign: TextAlign.justify,
                 fontSize: 14,
               ),
             ),
-            // const SizedBox(height: 20),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-              // width: 700,
               child: MyText(
                 text:
                     "Curious and always learning, I love exploring new tools, refining UI/UX design, and turning ideas into digital experiences that truly make an impact.",
-                textColor: Theme.of(context).colorScheme.onBackground,
+                textColor: Theme.of(context).colorScheme.secondary,
                 textAlign: TextAlign.justify,
                 fontSize: 14,
               ),
@@ -98,6 +90,9 @@ class About extends StatelessWidget {
               iconPath: "assets/img/mobile.png",
               title: "Mobile Development",
               subtitle: "Creating fast, cross-platform\nFlutter apps.",
+              titleSize: 14,
+              subtitleSize: 12,
+              maxWidth: 330,
             ),
             const SizedBox(height: 25),
             _buildFeatureCard(
@@ -108,6 +103,9 @@ class About extends StatelessWidget {
               title: "Backend Integration",
               subtitle:
                   "Building robust server-side\nlogic using Node.js and Firebase.",
+              titleSize: 14,
+              subtitleSize: 12,
+              maxWidth: 330,
             ),
             const SizedBox(height: 25),
             _buildFeatureCard(
@@ -118,6 +116,9 @@ class About extends StatelessWidget {
               title: "App Deployment",
               subtitle:
                   "Publishing production-ready\napps to Play Store and App Store.",
+              titleSize: 14,
+              subtitleSize: 12,
+              maxWidth: 330,
             ),
             const SizedBox(height: 25),
             _buildFeatureCard(
@@ -128,161 +129,10 @@ class About extends StatelessWidget {
               title: "UI/UX Design",
               subtitle:
                   "Designing intuitive and\nvisually engaging user interfaces.",
+              titleSize: 14,
+              subtitleSize: 12,
+              maxWidth: 330,
             ),
-
-            // Flexible(
-            //   flex: 1,
-            //   child: Column(
-            //     children: [
-            //       _buildFeatureCard(
-            //         context,
-            //         controller,
-            //         index: 0,
-            //         iconPath: "assets/img/mobile.png",
-            //         title: "Mobile Development",
-            //         subtitle: "Creating fast, cross-platform\nFlutter apps.",
-            //       ),
-            //       const SizedBox(height: 25),
-            //       _buildFeatureCard(
-            //         context,
-            //         controller,
-            //         index: 1,
-            //         iconPath: "assets/img/backend.png",
-            //         title: "Backend Integration",
-            //         subtitle:
-            //             "Building robust server-side\nlogic using Node.js and Firebase.",
-            //       ),
-            //       const SizedBox(height: 25),
-            //       _buildFeatureCard(
-            //         context,
-            //         controller,
-            //         index: 2,
-            //         iconPath: "assets/img/googleplay.png",
-            //         title: "App Deployment",
-            //         subtitle:
-            //             "Publishing production-ready\napps to Play Store and App Store.",
-            //       ),
-            //       const SizedBox(height: 25),
-            //       _buildFeatureCard(
-            //         context,
-            //         controller,
-            //         index: 3,
-            //         iconPath: "assets/img/uiux.png",
-            //         title: "UI/UX Design",
-            //         subtitle:
-            //             "Designing intuitive and\nvisually engaging user interfaces.",
-            //       ),
-            //     ],
-            //   ),
-            // ),
-
-            // ===== Content Section =====
-            // Padding(
-            //   padding: EdgeInsets.only(
-            //     top: MediaQuery.of(context).size.width / (16 / 9) * 0.16,
-            //     left: 60,
-            //     right: 60,
-            //     bottom: 60,
-            //   ),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //       // ===== Left Side: Feature Cards =====
-            //       Flexible(
-            //         flex: 1,
-            //         child: Row(
-            //           children: [
-            //             _buildFeatureCard(
-            //               context,
-            //               controller,
-            //               index: 0,
-            //               iconPath: "assets/img/mobile.png",
-            //               title: "Mobile Development",
-            //               subtitle:
-            //                   "Creating fast, cross-platform\nFlutter apps.",
-            //             ),
-            //             const SizedBox(height: 25),
-            //             _buildFeatureCard(
-            //               context,
-            //               controller,
-            //               index: 1,
-            //               iconPath: "assets/img/backend.png",
-            //               title: "Backend Integration",
-            //               subtitle:
-            //                   "Building robust server-side\nlogic using Node.js and Firebase.",
-            //             ),
-            //             const SizedBox(height: 25),
-            //             _buildFeatureCard(
-            //               context,
-            //               controller,
-            //               index: 2,
-            //               iconPath: "assets/img/googleplay.png",
-            //               title: "App Deployment",
-            //               subtitle:
-            //                   "Publishing production-ready\napps to Play Store and App Store.",
-            //             ),
-            //             const SizedBox(height: 25),
-            //             _buildFeatureCard(
-            //               context,
-            //               controller,
-            //               index: 3,
-            //               iconPath: "assets/img/uiux.png",
-            //               title: "UI/UX Design",
-            //               subtitle:
-            //                   "Designing intuitive and\nvisually engaging user interfaces.",
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //
-            //       // ===== Right Side: About Text =====
-            //       // Flexible(
-            //       //   flex: 1,
-            //       //   child: Column(
-            //       //     crossAxisAlignment: CrossAxisAlignment.start,
-            //       //     children: [
-            //       //       SizedBox(
-            //       //         width: 700,
-            //       //         child: MyText(
-            //       //           text:
-            //       //               "I’m Mohammed Kaif, a passionate Flutter Developer with over a year of experience building cross-platform mobile and web apps that are fast, scalable, and beautifully designed. I specialize in Flutter, Dart, and Node.js, and work with Firebase, REST APIs, and CI/CD pipelines to deliver seamless, production-ready solutions.",
-            //       //           textColor:
-            //       //               Theme.of(context).colorScheme.onBackground,
-            //       //           textAlign: TextAlign.justify,
-            //       //           fontSize: 20,
-            //       //         ),
-            //       //       ),
-            //       //       const SizedBox(height: 20),
-            //       //       SizedBox(
-            //       //         width: 700,
-            //       //         child: MyText(
-            //       //           text:
-            //       //               "At Spin Info Solutions, I’ve helped build user-focused apps that run smoother, deploy faster, and perform better. I believe great products are born from a balance of creativity, clean architecture, and attention to detail — and that’s what I aim for in every project.",
-            //       //           textColor:
-            //       //               Theme.of(context).colorScheme.onBackground,
-            //       //           textAlign: TextAlign.justify,
-            //       //           fontSize: 20,
-            //       //         ),
-            //       //       ),
-            //       //       const SizedBox(height: 20),
-            //       //       SizedBox(
-            //       //         width: 700,
-            //       //         child: MyText(
-            //       //           text:
-            //       //               "Curious and always learning, I love exploring new tools, refining UI/UX design, and turning ideas into digital experiences that truly make an impact.",
-            //       //           textColor:
-            //       //               Theme.of(context).colorScheme.onBackground,
-            //       //           textAlign: TextAlign.justify,
-            //       //           fontSize: 20,
-            //       //         ),
-            //       //       ),
-            //       //     ],
-            //       //   ),
-            //       // ),
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -300,7 +150,7 @@ class About extends StatelessWidget {
                   MyText(
                     text: "About",
                     fontSize: 50,
-                    textColor: Theme.of(context).colorScheme.onBackground,
+                    textColor: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.bold,
                   ),
                   Container(
@@ -332,7 +182,7 @@ class About extends StatelessWidget {
               child: MyText(
                 text:
                     "I’m Mohammed Kaif, a passionate Flutter Developer with over a year of experience building cross-platform mobile and web apps that are fast, scalable, and beautifully designed. I specialize in Flutter, Dart, and Node.js, and work with Firebase, REST APIs, and CI/CD pipelines to deliver seamless, production-ready solutions.",
-                textColor: Theme.of(context).colorScheme.onBackground,
+                textColor: Theme.of(context).colorScheme.secondary,
                 textAlign: TextAlign.justify,
                 fontSize: 16,
               ),
@@ -344,7 +194,7 @@ class About extends StatelessWidget {
               child: MyText(
                 text:
                     "At Spin Info Solutions, I’ve helped build user-focused apps that run smoother, deploy faster, and perform better. I believe great products are born from a balance of creativity, clean architecture, and attention to detail — and that’s what I aim for in every project.",
-                textColor: Theme.of(context).colorScheme.onBackground,
+                textColor: Theme.of(context).colorScheme.secondary,
                 textAlign: TextAlign.justify,
                 fontSize: 16,
               ),
@@ -356,7 +206,7 @@ class About extends StatelessWidget {
               child: MyText(
                 text:
                     "Curious and always learning, I love exploring new tools, refining UI/UX design, and turning ideas into digital experiences that truly make an impact.",
-                textColor: Theme.of(context).colorScheme.onBackground,
+                textColor: Theme.of(context).colorScheme.secondary,
                 textAlign: TextAlign.justify,
                 fontSize: 16,
               ),
@@ -369,6 +219,9 @@ class About extends StatelessWidget {
               iconPath: "assets/img/mobile.png",
               title: "Mobile Development",
               subtitle: "Creating fast, cross-platform\nFlutter apps.",
+              titleSize: 16,
+              subtitleSize: 14,
+              maxWidth: 400,
             ),
             const SizedBox(height: 25),
             _buildFeatureCard(
@@ -379,6 +232,9 @@ class About extends StatelessWidget {
               title: "Backend Integration",
               subtitle:
                   "Building robust server-side\nlogic using Node.js and Firebase.",
+              titleSize: 16,
+              subtitleSize: 14,
+              maxWidth: 400,
             ),
             const SizedBox(height: 25),
             _buildFeatureCard(
@@ -389,6 +245,9 @@ class About extends StatelessWidget {
               title: "App Deployment",
               subtitle:
                   "Publishing production-ready\napps to Play Store and App Store.",
+              titleSize: 16,
+              subtitleSize: 14,
+              maxWidth: 400,
             ),
             const SizedBox(height: 25),
             _buildFeatureCard(
@@ -399,161 +258,10 @@ class About extends StatelessWidget {
               title: "UI/UX Design",
               subtitle:
                   "Designing intuitive and\nvisually engaging user interfaces.",
+              titleSize: 16,
+              subtitleSize: 14,
+              maxWidth: 400,
             ),
-
-            // Flexible(
-            //   flex: 1,
-            //   child: Column(
-            //     children: [
-            //       _buildFeatureCard(
-            //         context,
-            //         controller,
-            //         index: 0,
-            //         iconPath: "assets/img/mobile.png",
-            //         title: "Mobile Development",
-            //         subtitle: "Creating fast, cross-platform\nFlutter apps.",
-            //       ),
-            //       const SizedBox(height: 25),
-            //       _buildFeatureCard(
-            //         context,
-            //         controller,
-            //         index: 1,
-            //         iconPath: "assets/img/backend.png",
-            //         title: "Backend Integration",
-            //         subtitle:
-            //             "Building robust server-side\nlogic using Node.js and Firebase.",
-            //       ),
-            //       const SizedBox(height: 25),
-            //       _buildFeatureCard(
-            //         context,
-            //         controller,
-            //         index: 2,
-            //         iconPath: "assets/img/googleplay.png",
-            //         title: "App Deployment",
-            //         subtitle:
-            //             "Publishing production-ready\napps to Play Store and App Store.",
-            //       ),
-            //       const SizedBox(height: 25),
-            //       _buildFeatureCard(
-            //         context,
-            //         controller,
-            //         index: 3,
-            //         iconPath: "assets/img/uiux.png",
-            //         title: "UI/UX Design",
-            //         subtitle:
-            //             "Designing intuitive and\nvisually engaging user interfaces.",
-            //       ),
-            //     ],
-            //   ),
-            // ),
-
-            // ===== Content Section =====
-            // Padding(
-            //   padding: EdgeInsets.only(
-            //     top: MediaQuery.of(context).size.width / (16 / 9) * 0.16,
-            //     left: 60,
-            //     right: 60,
-            //     bottom: 60,
-            //   ),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //       // ===== Left Side: Feature Cards =====
-            //       Flexible(
-            //         flex: 1,
-            //         child: Row(
-            //           children: [
-            //             _buildFeatureCard(
-            //               context,
-            //               controller,
-            //               index: 0,
-            //               iconPath: "assets/img/mobile.png",
-            //               title: "Mobile Development",
-            //               subtitle:
-            //                   "Creating fast, cross-platform\nFlutter apps.",
-            //             ),
-            //             const SizedBox(height: 25),
-            //             _buildFeatureCard(
-            //               context,
-            //               controller,
-            //               index: 1,
-            //               iconPath: "assets/img/backend.png",
-            //               title: "Backend Integration",
-            //               subtitle:
-            //                   "Building robust server-side\nlogic using Node.js and Firebase.",
-            //             ),
-            //             const SizedBox(height: 25),
-            //             _buildFeatureCard(
-            //               context,
-            //               controller,
-            //               index: 2,
-            //               iconPath: "assets/img/googleplay.png",
-            //               title: "App Deployment",
-            //               subtitle:
-            //                   "Publishing production-ready\napps to Play Store and App Store.",
-            //             ),
-            //             const SizedBox(height: 25),
-            //             _buildFeatureCard(
-            //               context,
-            //               controller,
-            //               index: 3,
-            //               iconPath: "assets/img/uiux.png",
-            //               title: "UI/UX Design",
-            //               subtitle:
-            //                   "Designing intuitive and\nvisually engaging user interfaces.",
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //
-            //       // ===== Right Side: About Text =====
-            //       // Flexible(
-            //       //   flex: 1,
-            //       //   child: Column(
-            //       //     crossAxisAlignment: CrossAxisAlignment.start,
-            //       //     children: [
-            //       //       SizedBox(
-            //       //         width: 700,
-            //       //         child: MyText(
-            //       //           text:
-            //       //               "I’m Mohammed Kaif, a passionate Flutter Developer with over a year of experience building cross-platform mobile and web apps that are fast, scalable, and beautifully designed. I specialize in Flutter, Dart, and Node.js, and work with Firebase, REST APIs, and CI/CD pipelines to deliver seamless, production-ready solutions.",
-            //       //           textColor:
-            //       //               Theme.of(context).colorScheme.onBackground,
-            //       //           textAlign: TextAlign.justify,
-            //       //           fontSize: 20,
-            //       //         ),
-            //       //       ),
-            //       //       const SizedBox(height: 20),
-            //       //       SizedBox(
-            //       //         width: 700,
-            //       //         child: MyText(
-            //       //           text:
-            //       //               "At Spin Info Solutions, I’ve helped build user-focused apps that run smoother, deploy faster, and perform better. I believe great products are born from a balance of creativity, clean architecture, and attention to detail — and that’s what I aim for in every project.",
-            //       //           textColor:
-            //       //               Theme.of(context).colorScheme.onBackground,
-            //       //           textAlign: TextAlign.justify,
-            //       //           fontSize: 20,
-            //       //         ),
-            //       //       ),
-            //       //       const SizedBox(height: 20),
-            //       //       SizedBox(
-            //       //         width: 700,
-            //       //         child: MyText(
-            //       //           text:
-            //       //               "Curious and always learning, I love exploring new tools, refining UI/UX design, and turning ideas into digital experiences that truly make an impact.",
-            //       //           textColor:
-            //       //               Theme.of(context).colorScheme.onBackground,
-            //       //           textAlign: TextAlign.justify,
-            //       //           fontSize: 20,
-            //       //         ),
-            //       //       ),
-            //       //     ],
-            //       //   ),
-            //       // ),
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -571,7 +279,7 @@ class About extends StatelessWidget {
                   MyText(
                     text: "About",
                     fontSize: 50,
-                    textColor: Theme.of(context).colorScheme.onBackground,
+                    textColor: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.bold,
                   ),
                   Container(
@@ -622,6 +330,9 @@ class About extends StatelessWidget {
                           title: "Mobile Development",
                           subtitle:
                               "Creating fast, cross-platform\nFlutter apps.",
+                          titleSize: 18,
+                          subtitleSize: 16,
+                          maxWidth: 400,
                         ),
                         const SizedBox(height: 25),
                         _buildFeatureCard(
@@ -632,6 +343,9 @@ class About extends StatelessWidget {
                           title: "Backend Integration",
                           subtitle:
                               "Building robust server-side\nlogic using Node.js and Firebase.",
+                          titleSize: 18,
+                          subtitleSize: 16,
+                          maxWidth: 400,
                         ),
                         const SizedBox(height: 25),
                         _buildFeatureCard(
@@ -642,6 +356,9 @@ class About extends StatelessWidget {
                           title: "App Deployment",
                           subtitle:
                               "Publishing production-ready\napps to Play Store and App Store.",
+                          titleSize: 18,
+                          subtitleSize: 16,
+                          maxWidth: 400,
                         ),
                         const SizedBox(height: 25),
                         _buildFeatureCard(
@@ -652,6 +369,9 @@ class About extends StatelessWidget {
                           title: "UI/UX Design",
                           subtitle:
                               "Designing intuitive and\nvisually engaging user interfaces.",
+                          titleSize: 18,
+                          subtitleSize: 16,
+                          maxWidth: 400,
                         ),
                       ],
                     ),
@@ -668,8 +388,7 @@ class About extends StatelessWidget {
                           child: MyText(
                             text:
                                 "I’m Mohammed Kaif, a passionate Flutter Developer with over a year of experience building cross-platform mobile and web apps that are fast, scalable, and beautifully designed. I specialize in Flutter, Dart, and Node.js, and work with Firebase, REST APIs, and CI/CD pipelines to deliver seamless, production-ready solutions.",
-                            textColor:
-                                Theme.of(context).colorScheme.onBackground,
+                            textColor: Theme.of(context).colorScheme.secondary,
                             textAlign: TextAlign.justify,
                             fontSize: 20,
                           ),
@@ -680,8 +399,7 @@ class About extends StatelessWidget {
                           child: MyText(
                             text:
                                 "At Spin Info Solutions, I’ve helped build user-focused apps that run smoother, deploy faster, and perform better. I believe great products are born from a balance of creativity, clean architecture, and attention to detail — and that’s what I aim for in every project.",
-                            textColor:
-                                Theme.of(context).colorScheme.onBackground,
+                            textColor: Theme.of(context).colorScheme.secondary,
                             textAlign: TextAlign.justify,
                             fontSize: 20,
                           ),
@@ -692,8 +410,7 @@ class About extends StatelessWidget {
                           child: MyText(
                             text:
                                 "Curious and always learning, I love exploring new tools, refining UI/UX design, and turning ideas into digital experiences that truly make an impact.",
-                            textColor:
-                                Theme.of(context).colorScheme.onBackground,
+                            textColor: Theme.of(context).colorScheme.secondary,
                             textAlign: TextAlign.justify,
                             fontSize: 20,
                           ),
@@ -717,6 +434,9 @@ Widget _buildFeatureCard(
   required int index,
   required String iconPath,
   required String title,
+  required double titleSize,
+  required double subtitleSize,
+  required double maxWidth,
   required String subtitle,
 }) {
   return MouseRegion(
@@ -727,14 +447,14 @@ Widget _buildFeatureCard(
         scale: controller.isHoveredList[index].value ? 1.05 : 1.0,
         duration: const Duration(milliseconds: 200),
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 400),
+          constraints: BoxConstraints(maxWidth: maxWidth),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color:
                   controller.toggle.value == true
-                      ? Color(0xfffff1f7ff)
+                      ? Color(0xfff1f7ff)
                       : Color(0xff111827),
               boxShadow:
                   controller.isHoveredList[index].value
@@ -765,8 +485,8 @@ Widget _buildFeatureCard(
                     gradient: const LinearGradient(
                       colors: [
                         primaryColor,
-                        Color(0xffff7241ea),
-                        Color(0xffff9233ea),
+                        Color(0xff7241ea),
+                        Color(0xff9233ea),
                       ],
                     ),
                     borderRadius: BorderRadius.circular(10),
@@ -782,14 +502,14 @@ Widget _buildFeatureCard(
                   children: [
                     MyText(
                       text: title,
-                      fontSize: 20,
-                      textColor: Theme.of(context).colorScheme.onBackground,
+                      fontSize: titleSize,
+                      textColor: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.w600,
                     ),
                     MyText(
                       text: subtitle,
-                      textColor: Theme.of(context).colorScheme.onBackground,
-                      fontSize: 14,
+                      textColor: Theme.of(context).colorScheme.secondary,
+                      fontSize: subtitleSize,
                     ),
                   ],
                 ),

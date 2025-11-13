@@ -5,7 +5,7 @@ import 'package:mr_portfolio/View/about.dart';
 import 'package:mr_portfolio/View/contact.dart';
 import 'package:mr_portfolio/View/footer.dart';
 import 'package:mr_portfolio/View/home.dart';
-import 'package:mr_portfolio/View/mySkills.dart';
+import 'package:mr_portfolio/View/my_skills.dart';
 import 'package:mr_portfolio/View/projects.dart';
 import 'package:mr_portfolio/responsive.dart';
 import 'package:mr_portfolio/widgets/my_drawer.dart';
@@ -21,49 +21,38 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
-
     return Scaffold(
-      backgroundColor: Colors.transparent, // Ensures transparency
+      backgroundColor: Colors.transparent,
       appBar: ResponsiveAppBar(),
       drawer: MyDrawer(),
       body: Stack(
         children: [
-          // Overlay
           Obx(() {
             return Container(
               color:
                   controller.toggle.value == true
                       ? Colors.white
-                      : Color(0xffff1f2837),
+                      : Color(0xff1f2837),
             );
           }),
           SingleChildScrollView(
             controller: controller.scrollController,
             child: Column(
               children: [
-                //=====Home
                 Home(),
                 Gap(Responsive.isMobile(context) ? 30 : 100),
-                //=====About
                 About(),
                 Gap(Responsive.isMobile(context) ? 30 : 100),
-                //=====My_Skills
                 MySkills(),
                 Gap(Responsive.isMobile(context) ? 30 : 100),
-                //=====Portfolio
                 Projects(),
                 Gap(Responsive.isMobile(context) ? 30 : 100),
-                //=====Contact
                 Contact(),
                 Gap(Responsive.isMobile(context) ? 30 : 0),
-                //=====Footer
                 Footer(),
               ],
             ),
           ),
-          // Tap to Scroll Button
           Positioned(
             bottom: Responsive.isMobile(context) ? 40 : 100,
             right: Responsive.isMobile(context) ? 20 : 60,

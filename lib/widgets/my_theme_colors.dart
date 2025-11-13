@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 
 const lightColorScheme = ColorScheme(
   brightness: Brightness.light,
-  primary: Color(0xFF02569B),          // Flutter Blue (main brand color)
+  primary: Color(0xFF02569B),
+  // Flutter Blue (main brand color)
   onPrimary: Color(0xFFFFFFFF),
-  primaryContainer: Color(0xFFD6E4FF), // Light blue container
+  primaryContainer: Color(0xFFD6E4FF),
+  // Light blue container
   onPrimaryContainer: Color(0xFF001D36),
 
-  secondary: Color(0xFF13B9FD),        // Flutter Sky Blue
+  secondary: Color(0xFF1A1C1E),
+  // Flutter Sky Blue
   onSecondary: Color(0xFF003548),
   secondaryContainer: Color(0xFFC6EFFF),
   onSecondaryContainer: Color(0xFF001F2A),
 
-  tertiary: Color(0xFFFFC107),         // Accent Yellow
+  tertiary: Color(0xFFFFC107),
+  // Accent Yellow
   onTertiary: Color(0xFF332B00),
   tertiaryContainer: Color(0xFFFFECB3),
   onTertiaryContainer: Color(0xFF211B00),
@@ -22,7 +26,7 @@ const lightColorScheme = ColorScheme(
   errorContainer: Color(0xFFFFDAD6),
   onErrorContainer: Color(0xFF410002),
 
-  background: Color(0xFFFDFDFD),
+  background: Color(0xFF13B9FD),
   onBackground: Color(0xFF1A1C1E),
 
   surface: Color(0xFFFFFFFF),
@@ -43,20 +47,22 @@ const lightColorScheme = ColorScheme(
   scrim: Color(0xFF000000),
 );
 
-
 const darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
-  primary: Color(0xFF99CBFF),          // Soft blue in dark mode
+  primary: Color(0xFF99CBFF),
+  // Soft blue in dark mode
   onPrimary: Color(0xFF003257),
   primaryContainer: Color(0xFF004A80),
   onPrimaryContainer: Color(0xFFD6E4FF),
 
-  secondary: Color(0xFF66D3FF),        // Bright sky blue for highlights
+  secondary: Color(0xFFE1E1E1),
+  // Bright sky blue for highlights
   onSecondary: Color(0xFF003546),
   secondaryContainer: Color(0xFF004D65),
   onSecondaryContainer: Color(0xFFC6EFFF),
 
-  tertiary: Color(0xFFFFB300),         // Warm yellow accent
+  tertiary: Color(0xFFFFB300),
+  // Warm yellow accent
   onTertiary: Color(0xFF372B00),
   tertiaryContainer: Color(0xFF5A4300),
   onTertiaryContainer: Color(0xFFFFE08B),
@@ -67,7 +73,7 @@ const darkColorScheme = ColorScheme(
   onErrorContainer: Color(0xFFFFDAD6),
 
   background: Color(0xFF121212),
-  onBackground: Color(0xFFE1E1E1),
+  onBackground: Color(0xFF66D3FF),
 
   surface: Color(0xFF1E1E1E),
   onSurface: Color(0xFFE1E1E1),
@@ -86,7 +92,6 @@ const darkColorScheme = ColorScheme(
   surfaceTint: Color(0xFF99CBFF),
   scrim: Color(0xFF000000),
 );
-
 
 final ThemeData lightTheme = ThemeData(
   useMaterial3: true,

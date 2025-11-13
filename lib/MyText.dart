@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_portfolio/themeColor.dart';
 
 class MyText extends StatelessWidget {
@@ -10,15 +9,17 @@ class MyText extends StatelessWidget {
   final TextAlign? textAlign;
   final int? maxLines;
   final TextOverflow? overFlow;
-  const MyText(
-      {super.key,
-      required this.text,
-      this.textColor,
-      this.fontSize,
-      this.fontWeight,
-      this.textAlign,
-      this.maxLines,
-      this.overFlow});
+
+  const MyText({
+    super.key,
+    required this.text,
+    this.textColor,
+    this.fontSize,
+    this.fontWeight,
+    this.textAlign,
+    this.maxLines,
+    this.overFlow,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +28,12 @@ class MyText extends StatelessWidget {
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overFlow,
-      style: GoogleFonts.poppins(
-        textStyle: TextStyle(
-          color: textColor ?? primaryColor,
-          fontSize: fontSize ?? 18,
-          fontWeight:
-              fontWeight ?? FontWeight.normal, // Specify a valid font weight
-        ),
+      style: TextStyle(
+        color: textColor ?? primaryColor,
+        fontFamily: "Poppins",
+        fontSize: fontSize ?? 18,
+        fontWeight:
+            fontWeight ?? FontWeight.normal, // Specify a valid font weight
       ),
     );
   }
