@@ -14,7 +14,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        bool isMobile = constraints.maxWidth < 800; // Mobile breakpoint
+        bool isMobile = constraints.maxWidth < 800;
         return Obx(() {
           return AppBar(
             surfaceTintColor: Colors.transparent,

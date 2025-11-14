@@ -32,8 +32,7 @@ class MyText extends StatelessWidget {
         color: textColor ?? primaryColor,
         fontFamily: "Poppins",
         fontSize: fontSize ?? 18,
-        fontWeight:
-            fontWeight ?? FontWeight.normal, // Specify a valid font weight
+        fontWeight: fontWeight ?? FontWeight.normal,
       ),
     );
   }
