@@ -2,13 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mr_portfolio/Controller/controller.dart';
-import 'package:mr_portfolio/View/home_screen.dart';
-import 'package:mr_portfolio/widgets/my_theme_colors.dart';
+import 'package:mr_portfolio/core/theme/my_theme_colors.dart';
+import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
+import 'package:mr_portfolio/features/home/presentation/views/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Get.put(ScrollControllerX());
+  Get.put(ThemeController());
   runApp(const MyApp());
 }
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ScrollControllerX>();
+    final themeController = Get.find<ThemeController>();
 
     return Obx(
       () => GetMaterialApp(
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
         darkTheme: darkTheme,
-        themeMode: controller.toggle.value ? ThemeMode.light : ThemeMode.dark,
+        themeMode: themeController.toggle.value ? ThemeMode.light : ThemeMode.dark,
         home: HomeScreen(),
       ),
     );

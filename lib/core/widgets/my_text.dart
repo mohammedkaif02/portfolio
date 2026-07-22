@@ -1,0 +1,39 @@
+import 'package:flutter/material.dart';
+import 'package:mr_portfolio/core/theme/theme_color.dart';
+
+class MyText extends StatelessWidget {
+  final String text;
+  final Color? textColor;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final TextAlign? textAlign;
+  final int? maxLines;
+  final TextOverflow? overFlow;
+
+  const MyText({
+    super.key,
+    required this.text,
+    this.textColor,
+    this.fontSize,
+    this.fontWeight,
+    this.textAlign,
+    this.maxLines,
+    this.overFlow,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: textAlign,
+      maxLines: maxLines,
+      overflow: overFlow,
+      style: TextStyle(
+        color: textColor ?? primaryColor,
+        fontFamily: "Poppins",
+        fontSize: fontSize ?? 18,
+        fontWeight: fontWeight ?? FontWeight.normal,
+      ),
+    );
+  }
+}

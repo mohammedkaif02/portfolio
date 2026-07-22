@@ -1,5 +1,5 @@
 name: mr_portfolio
-description: "My personal portfolio showcasing Flutter, Full Stack projects, and UI/UX work."
+description: "Mohammed Kaif - Portfolio showcasing production-grade Flutter, Clean Architecture, and Mobile App Development."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
