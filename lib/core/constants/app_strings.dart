@@ -25,7 +25,16 @@ class AppStrings {
   static const String btnDownloadCV = "Download CV";
   static const String btnLetsWorkTogether = "LET'S WORK TOGETHER";
 
-  // About Section
+  // About Section & Recruiter Metrics
+  static const String metricYearsVal = "2+";
+  static const String metricYearsLabel = "Years Flutter Experience";
+  static const String metricAppsVal = "6+";
+  static const String metricAppsLabel = "Production Apps Shipped";
+  static const String metricCiCdVal = "40%";
+  static const String metricCiCdLabel = "Build Speedup (CI/CD)";
+  static const String metricEffVal = "30%";
+  static const String metricEffLabel = "Efficiency Boost";
+
   static const String aboutParagraph1 =
       "I'm Mohammed Kaif, a Flutter Developer with 2+ years of professional experience building scalable, production-ready Android, iOS, and Flutter Web applications. I specialize in Clean Architecture, Offline-First Architecture, GetX, gRPC, REST APIs, Firebase, Hive, and CI/CD, delivering fast, reliable, and maintainable solutions.";
   static const String aboutParagraph2 =

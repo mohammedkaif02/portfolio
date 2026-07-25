@@ -233,88 +233,94 @@ class Contact extends StatelessWidget {
   Widget _buildQuickCopyBar(BuildContext context, bool isMobile) {
     final isDark = !themeController.toggle.value;
 
-    return InkWell(
-      onTap: () {
-        Clipboard.setData(
-          const ClipboardData(text: AppStrings.contactEmailValue),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Row(
-              children: const [
-                Icon(Icons.check_circle_rounded, color: Colors.white),
-                SizedBox(width: 10),
-                Text(AppStrings.contactCopiedToast),
-              ],
-            ),
-            backgroundColor: const Color(0xFF10B981),
-            behavior: SnackBarBehavior.floating,
-            duration: const Duration(seconds: 2),
-            margin: const EdgeInsets.all(20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-        );
-      },
-      borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        decoration: BoxDecoration(
-          color: isDark ? AppColors.darkBackground : Colors.white,
-          borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
-          border: Border.all(
-            color: AppColors.primary.withValues(alpha: 0.5),
-            width: 1.5,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.primary.withValues(alpha: 0.2),
-              blurRadius: 15,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(
-              Icons.email_outlined,
-              color: AppColors.primary,
-              size: 20,
-            ),
-            const Gap(10),
-            MyText(
-              text: AppStrings.contactEmailValue,
-              fontSize: isMobile ? 13 : 15,
-              fontWeight: FontWeight.bold,
-              textColor: isDark ? Colors.white : Colors.black87,
-            ),
-            const Gap(14),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
-              ),
-              child: Row(
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: InkWell(
+        onTap: () {
+          Clipboard.setData(
+            const ClipboardData(text: AppStrings.contactEmailValue),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Row(
                 children: const [
-                  Icon(
-                    Icons.copy_rounded,
-                    color: AppColors.primary,
-                    size: 14,
-                  ),
-                  Gap(4),
-                  MyText(
-                    text: "Copy",
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    textColor: AppColors.primary,
-                  ),
+                  Icon(Icons.check_circle_rounded, color: Colors.white),
+                  SizedBox(width: 10),
+                  Text(AppStrings.contactCopiedToast),
                 ],
               ),
+              backgroundColor: const Color(0xFF10B981),
+              behavior: SnackBarBehavior.floating,
+              duration: const Duration(seconds: 2),
+              margin: const EdgeInsets.all(20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
-          ],
+          );
+        },
+        borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 14 : 20,
+            vertical: isMobile ? 10 : 12,
+          ),
+          decoration: BoxDecoration(
+            color: isDark ? AppColors.darkBackground : Colors.white,
+            borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+            border: Border.all(
+              color: AppColors.primary.withValues(alpha: 0.5),
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withValues(alpha: 0.2),
+                blurRadius: 15,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.email_outlined,
+                color: AppColors.primary,
+                size: 20,
+              ),
+              const Gap(8),
+              MyText(
+                text: AppStrings.contactEmailValue,
+                fontSize: isMobile ? 12 : 15,
+                fontWeight: FontWeight.bold,
+                textColor: isDark ? Colors.white : Colors.black87,
+              ),
+              const Gap(10),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+                ),
+                child: Row(
+                  children: const [
+                    Icon(
+                      Icons.copy_rounded,
+                      color: AppColors.primary,
+                      size: 13,
+                    ),
+                    Gap(4),
+                    MyText(
+                      text: "Copy",
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                      textColor: AppColors.primary,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

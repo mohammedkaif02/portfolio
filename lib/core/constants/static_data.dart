@@ -9,6 +9,7 @@ class StaticData {
       icon: Icons.phone_android,
       color: const Color(0xff3b82f6),
       title: "Mobile Development",
+      tag: "Core Stack",
       skills: const ["Flutter", "Dart", "Android", "iOS"],
       logo: const [
         "assets/icons/flutter.png",
@@ -21,6 +22,7 @@ class StaticData {
       icon: Icons.layers_rounded,
       color: const Color(0xff8b5cf6),
       title: "State Management",
+      tag: "Architecture",
       skills: const ["GetX", "Bloc", "Provider"],
       logo: const [
         "assets/icons/getx.png",
@@ -32,6 +34,7 @@ class StaticData {
       icon: Icons.web_rounded,
       color: const Color(0xff22c55e),
       title: "Web Development",
+      tag: "Cross-Platform",
       skills: const ["Flutter Web", "Go Router", "Auto Router"],
       logo: const [
         "assets/icons/flutter.png",
@@ -43,6 +46,7 @@ class StaticData {
       icon: Icons.storage_rounded,
       color: const Color(0xffef4444),
       title: "Backend & APIs",
+      tag: "Integration",
       skills: const [
         "Node.js",
         "REST API",
@@ -64,6 +68,7 @@ class StaticData {
       icon: Icons.cloud_circle_rounded,
       color: const Color(0xfff59e0b),
       title: "Database & Storage",
+      tag: "Persistence",
       skills: const ["PostgreSQL", "MySQL", "Firebase", "Hive"],
       logo: const [
         "assets/icons/postgresql.png",
@@ -76,6 +81,7 @@ class StaticData {
       icon: Icons.design_services_rounded,
       color: const Color(0xfff43f5e),
       title: "UI/UX & Tools",
+      tag: "DevOps & Design",
       skills: const [
         "Figma",
         "Git",
