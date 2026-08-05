@@ -7,6 +7,7 @@ import 'package:mr_portfolio/core/constants/app_strings.dart';
 import 'package:mr_portfolio/core/theme/app_colors.dart';
 import 'package:mr_portfolio/core/theme/theme_color.dart';
 import 'package:mr_portfolio/core/widgets/my_text.dart';
+import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
 import 'package:mr_portfolio/core/widgets/section_header.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
@@ -43,11 +44,14 @@ class Projects extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SectionHeader(title: AppStrings.navProjects),
+          const ScrollReveal(child: SectionHeader(title: AppStrings.navProjects)),
           const Gap(AppDimensions.spaceXL),
 
           // Category Filter Tabs Bar
-          _buildCategoryFilters(context),
+          ScrollReveal(
+            delayMs: 100,
+            child: _buildCategoryFilters(context),
+          ),
           const Gap(AppDimensions.spaceHuge),
 
           // Dynamic Responsive Grid of Projects
@@ -81,9 +85,12 @@ class Projects extends StatelessWidget {
                     ),
                     itemCount: projects.length,
                     itemBuilder: (context, index) {
-                      return ProjectCard(
-                        project: projects[index],
-                        themeController: themeController,
+                      return ScrollReveal(
+                        delayMs: index * 120,
+                        child: ProjectCard(
+                          project: projects[index],
+                          themeController: themeController,
+                        ),
                       );
                     },
                   );

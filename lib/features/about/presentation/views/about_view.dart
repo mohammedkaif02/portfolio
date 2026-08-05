@@ -6,6 +6,7 @@ import 'package:mr_portfolio/core/constants/app_strings.dart';
 import 'package:mr_portfolio/core/theme/app_colors.dart';
 import 'package:mr_portfolio/core/widgets/my_text.dart';
 import 'package:mr_portfolio/core/widgets/responsive.dart';
+import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
 import 'package:mr_portfolio/core/widgets/section_header.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
@@ -40,14 +41,19 @@ class About extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SectionHeader(
-            title: AppStrings.navAbout,
-            fontSize: AppDimensions.fontSectionMobile,
+          const ScrollReveal(
+            child: SectionHeader(
+              title: AppStrings.navAbout,
+              fontSize: AppDimensions.fontSectionMobile,
+            ),
           ),
           const Gap(25),
           _buildMetricsGrid(context, crossAxisCount: 2, isMobile: true),
           const Gap(25),
-          _buildBioCard(context, isMobile: true),
+          ScrollReveal(
+            delayMs: 200,
+            child: _buildBioCard(context, isMobile: true),
+          ),
           const Gap(30),
           _buildFeatureGrid(context, crossAxisCount: 1, isMobile: true),
         ],
@@ -67,11 +73,14 @@ class About extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SectionHeader(title: AppStrings.navAbout),
+          const ScrollReveal(child: SectionHeader(title: AppStrings.navAbout)),
           const Gap(30),
           _buildMetricsGrid(context, crossAxisCount: 4, isMobile: false),
           const Gap(35),
-          _buildBioCard(context, isMobile: false),
+          ScrollReveal(
+            delayMs: 200,
+            child: _buildBioCard(context, isMobile: false),
+          ),
           const Gap(40),
           _buildFeatureGrid(context, crossAxisCount: 2, isMobile: false),
         ],
@@ -91,7 +100,7 @@ class About extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SectionHeader(title: AppStrings.navAbout),
+          const ScrollReveal(child: SectionHeader(title: AppStrings.navAbout)),
           const Gap(35),
 
           // Top Recruiter Impact Metrics Banner
@@ -104,7 +113,10 @@ class About extends StatelessWidget {
             children: [
               Expanded(
                 flex: 1,
-                child: _buildBioCard(context, isMobile: false),
+                child: ScrollReveal(
+                  delayMs: 200,
+                  child: _buildBioCard(context, isMobile: false),
+                ),
               ),
               const Gap(40),
               Expanded(
@@ -165,12 +177,15 @@ class About extends StatelessWidget {
           itemCount: metrics.length,
           itemBuilder: (context, index) {
             final m = metrics[index];
-            return MetricCard(
-              value: m['value'] as String,
-              label: m['label'] as String,
-              icon: m['icon'] as IconData,
-              accentColor: m['color'] as Color,
-              themeController: themeController,
+            return ScrollReveal(
+              delayMs: index * 100,
+              child: MetricCard(
+                value: m['value'] as String,
+                label: m['label'] as String,
+                icon: m['icon'] as IconData,
+                accentColor: m['color'] as Color,
+                themeController: themeController,
+              ),
             );
           },
         );
@@ -291,14 +306,17 @@ class About extends StatelessWidget {
           itemCount: features.length,
           itemBuilder: (context, index) {
             final f = features[index];
-            return FeatureCard(
-              index: index,
-              iconPath: f['icon']!,
-              title: f['title']!,
-              subtitle: f['sub']!,
-              themeController: themeController,
-              navigationController: navigationController,
-              isMobile: isMobile,
+            return ScrollReveal(
+              delayMs: index * 100,
+              child: FeatureCard(
+                index: index,
+                iconPath: f['icon']!,
+                title: f['title']!,
+                subtitle: f['sub']!,
+                themeController: themeController,
+                navigationController: navigationController,
+                isMobile: isMobile,
+              ),
             );
           },
         );

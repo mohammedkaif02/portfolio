@@ -6,6 +6,7 @@ import 'package:mr_portfolio/core/constants/app_strings.dart';
 import 'package:mr_portfolio/core/constants/static_data.dart';
 import 'package:mr_portfolio/core/theme/app_colors.dart';
 import 'package:mr_portfolio/core/widgets/my_text.dart';
+import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
 import 'package:mr_portfolio/core/widgets/section_header.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
@@ -52,11 +53,14 @@ class MySkills extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SectionHeader(title: AppStrings.navSkills),
+          const ScrollReveal(child: SectionHeader(title: AppStrings.navSkills)),
           const Gap(AppDimensions.spaceL),
 
           // Top Engineering Competency Banner
-          _buildCompetencyBanner(context, isMobile),
+          ScrollReveal(
+            delayMs: 100,
+            child: _buildCompetencyBanner(context, isMobile),
+          ),
           const Gap(AppDimensions.spaceHuge),
 
           // Skills Grid Layout
@@ -73,11 +77,14 @@ class MySkills extends StatelessWidget {
                 ),
                 itemCount: skillData.length,
                 itemBuilder: (context, index) {
-                  return SkillCategoryCard(
-                    index: index,
-                    category: skillData[index],
-                    themeController: themeController,
-                    skillsController: skillsController,
+                  return ScrollReveal(
+                    delayMs: index * 100,
+                    child: SkillCategoryCard(
+                      index: index,
+                      category: skillData[index],
+                      themeController: themeController,
+                      skillsController: skillsController,
+                    ),
                   );
                 },
               );

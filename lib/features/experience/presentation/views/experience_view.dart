@@ -7,6 +7,7 @@ import 'package:mr_portfolio/core/constants/static_data.dart';
 import 'package:mr_portfolio/core/theme/app_colors.dart';
 import 'package:mr_portfolio/core/theme/theme_color.dart';
 import 'package:mr_portfolio/core/widgets/my_text.dart';
+import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
 import 'package:mr_portfolio/core/widgets/section_header.dart';
 import 'package:mr_portfolio/features/experience/data/models/work_experience_model.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
@@ -40,7 +41,7 @@ class Experience extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SectionHeader(title: AppStrings.navExperience),
+          const ScrollReveal(child: SectionHeader(title: AppStrings.navExperience)),
           Gap(width < AppDimensions.breakpointMobile ? AppDimensions.spaceHuge : 60),
 
           ListView.builder(
@@ -49,12 +50,15 @@ class Experience extends StatelessWidget {
             itemCount: experienceList.length,
             itemBuilder: (context, index) {
               final item = experienceList[index];
-              return TimelineItem(
-                item: item,
-                isFirst: index == 0,
-                isLast: index == experienceList.length - 1,
-                index: index,
-                themeController: themeController,
+              return ScrollReveal(
+                delayMs: index * 150,
+                child: TimelineItem(
+                  item: item,
+                  isFirst: index == 0,
+                  isLast: index == experienceList.length - 1,
+                  index: index,
+                  themeController: themeController,
+                ),
               );
             },
           ),

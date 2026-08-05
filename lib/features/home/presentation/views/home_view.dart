@@ -7,6 +7,7 @@ import 'package:mr_portfolio/core/constants/app_strings.dart';
 import 'package:mr_portfolio/core/theme/app_colors.dart';
 import 'package:mr_portfolio/core/theme/theme_color.dart';
 import 'package:mr_portfolio/core/widgets/my_text.dart';
+import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
 import 'package:mr_portfolio/features/cv/presentation/controllers/cv_controller.dart';
@@ -63,30 +64,48 @@ class Home extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Gap(height / 6),
-            _gradientText(AppStrings.name, width * 0.09),
-            const Gap(AppDimensions.spaceS),
-            MyText(
-              text: AppStrings.roleTitle,
-              textColor: Theme.of(context).colorScheme.onSurfaceVariant,
-              fontWeight: FontWeight.bold,
-              fontSize: width * 0.04,
+            ScrollReveal(
+              delayMs: 0,
+              child: _gradientText(AppStrings.name, width * 0.09),
             ),
-            const Gap(AppDimensions.spaceM),
-            SizedBox(
-              width: width * 0.8,
+            const Gap(AppDimensions.spaceS),
+            ScrollReveal(
+              delayMs: 100,
               child: MyText(
-                text: AppStrings.tagline,
-                textColor: primaryColor,
-                textAlign: TextAlign.center,
+                text: AppStrings.roleTitle,
+                textColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                fontWeight: FontWeight.bold,
                 fontSize: width * 0.04,
               ),
             ),
+            const Gap(AppDimensions.spaceM),
+            ScrollReveal(
+              delayMs: 200,
+              child: SizedBox(
+                width: width * 0.8,
+                child: MyText(
+                  text: AppStrings.tagline,
+                  textColor: primaryColor,
+                  textAlign: TextAlign.center,
+                  fontSize: width * 0.04,
+                ),
+              ),
+            ),
             const Gap(AppDimensions.spaceL),
-            const StatusBadge(isCompact: true),
+            const ScrollReveal(
+              delayMs: 300,
+              child: StatusBadge(isCompact: true),
+            ),
             const Gap(AppDimensions.spaceL),
-            _socialIconsRow(context, AppDimensions.iconL),
+            ScrollReveal(
+              delayMs: 400,
+              child: _socialIconsRow(context, AppDimensions.iconL),
+            ),
             const Gap(AppDimensions.spaceHuge),
-            _buttonsRow(context),
+            ScrollReveal(
+              delayMs: 500,
+              child: _buttonsRow(context),
+            ),
             const Gap(AppDimensions.spaceHuge),
           ],
         ),
@@ -105,30 +124,48 @@ class Home extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _gradientText(AppStrings.name, 65),
+            ScrollReveal(
+              delayMs: 0,
+              child: _gradientText(AppStrings.name, 65),
+            ),
             const Gap(10),
-            MyText(
-              text: AppStrings.roleTitle,
-              textColor: Theme.of(context).colorScheme.onSurfaceVariant,
-              fontWeight: FontWeight.bold,
-              fontSize: 28,
+            ScrollReveal(
+              delayMs: 100,
+              child: MyText(
+                text: AppStrings.roleTitle,
+                textColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                fontWeight: FontWeight.bold,
+                fontSize: 28,
+              ),
             ),
             const Gap(15),
-            SizedBox(
-              width: width * 0.6,
-              child: MyText(
-                text: AppStrings.tagline,
-                textColor: primaryColor,
-                textAlign: TextAlign.center,
-                fontSize: 22,
+            ScrollReveal(
+              delayMs: 200,
+              child: SizedBox(
+                width: width * 0.6,
+                child: MyText(
+                  text: AppStrings.tagline,
+                  textColor: primaryColor,
+                  textAlign: TextAlign.center,
+                  fontSize: 22,
+                ),
               ),
             ),
             const Gap(20),
-            const StatusBadge(),
+            const ScrollReveal(
+              delayMs: 300,
+              child: StatusBadge(),
+            ),
             const Gap(30),
-            _socialIconsRow(context, 26),
+            ScrollReveal(
+              delayMs: 400,
+              child: _socialIconsRow(context, 26),
+            ),
             const Gap(40),
-            _buttonsRow(context),
+            ScrollReveal(
+              delayMs: 500,
+              child: _buttonsRow(context),
+            ),
           ],
         ),
       ),
@@ -156,30 +193,48 @@ class Home extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    _gradientText(AppStrings.name, 100),
+                    ScrollReveal(
+                      delayMs: 0,
+                      child: _gradientText(AppStrings.name, 100),
+                    ),
                     const Gap(8),
-                    MyText(
-                      text: AppStrings.roleTitle,
-                      textColor: Theme.of(context).colorScheme.onSurfaceVariant,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
+                    ScrollReveal(
+                      delayMs: 100,
+                      child: MyText(
+                        text: AppStrings.roleTitle,
+                        textColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                      ),
                     ),
                     const Gap(10),
-                    SizedBox(
-                      width: width * 0.47,
-                      child: MyText(
-                        text: AppStrings.tagline,
-                        textColor: primaryColor,
-                        textAlign: TextAlign.center,
-                        fontSize: 30,
+                    ScrollReveal(
+                      delayMs: 200,
+                      child: SizedBox(
+                        width: width * 0.47,
+                        child: MyText(
+                          text: AppStrings.tagline,
+                          textColor: primaryColor,
+                          textAlign: TextAlign.center,
+                          fontSize: 30,
+                        ),
                       ),
                     ),
                     const Gap(20),
-                    const StatusBadge(),
+                    const ScrollReveal(
+                      delayMs: 300,
+                      child: StatusBadge(),
+                    ),
                     const Gap(30),
-                    _socialIconsRow(context, 28),
+                    ScrollReveal(
+                      delayMs: 400,
+                      child: _socialIconsRow(context, 28),
+                    ),
                     const Gap(40),
-                    _buttonsRow(context),
+                    ScrollReveal(
+                      delayMs: 500,
+                      child: _buttonsRow(context),
+                    ),
                   ],
                 ),
               ),

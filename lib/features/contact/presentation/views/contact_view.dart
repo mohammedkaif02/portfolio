@@ -8,6 +8,7 @@ import 'package:mr_portfolio/core/constants/app_dimensions.dart';
 import 'package:mr_portfolio/core/constants/app_strings.dart';
 import 'package:mr_portfolio/core/theme/app_colors.dart';
 import 'package:mr_portfolio/core/widgets/my_text.dart';
+import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
 import 'package:mr_portfolio/core/widgets/section_header.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
@@ -44,40 +45,52 @@ class Contact extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SectionHeader(title: AppStrings.navContact),
+          const ScrollReveal(child: SectionHeader(title: AppStrings.navContact)),
           const Gap(AppDimensions.spaceXL),
 
           // Availability & Logistics recruiting banner card
-          _buildAvailabilityCard(context, isMobile, isPageTablet),
+          ScrollReveal(
+            delayMs: 100,
+            child: _buildAvailabilityCard(context, isMobile, isPageTablet),
+          ),
           const Gap(AppDimensions.spaceHuge),
 
           // Headline
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: MyText(
-              text: AppStrings.btnLetsWorkTogether,
-              fontSize: headlineFontSize,
-              textColor: Theme.of(context).colorScheme.secondary,
-              fontWeight: FontWeight.bold,
-              textAlign: TextAlign.center,
+          ScrollReveal(
+            delayMs: 200,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: MyText(
+                text: AppStrings.btnLetsWorkTogether,
+                fontSize: headlineFontSize,
+                textColor: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           const Gap(AppDimensions.spaceM),
 
           // Subtitle
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: isMobile ? 10 : 80),
-            child: MyText(
-              text: AppStrings.contactSubtitle,
-              fontSize: subtitleFontSize,
-              textAlign: TextAlign.center,
-              textColor: AppColors.primaryVariant,
+          ScrollReveal(
+            delayMs: 250,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: isMobile ? 10 : 80),
+              child: MyText(
+                text: AppStrings.contactSubtitle,
+                fontSize: subtitleFontSize,
+                textAlign: TextAlign.center,
+                textColor: AppColors.primaryVariant,
+              ),
             ),
           ),
           const Gap(AppDimensions.spaceHuge),
 
           // 1-Click Email Copy Bar
-          _buildQuickCopyBar(context, isMobile),
+          ScrollReveal(
+            delayMs: 300,
+            child: _buildQuickCopyBar(context, isMobile),
+          ),
           const Gap(AppDimensions.spaceHuge),
 
           // Contact Cards Grid
@@ -86,65 +99,77 @@ class Contact extends StatelessWidget {
             spacing: isMobile ? 16 : 24,
             runSpacing: isMobile ? 16 : 24,
             children: [
-              _buildContactCard(
-                context,
-                index: 0,
-                icon: CupertinoIcons.mail_solid,
-                title: AppStrings.contactEmailTitle,
-                value: AppStrings.contactEmailValue,
-                width: cardWidth,
-                onTap: () async {
-                  final Uri emailUri = Uri(
-                    scheme: 'mailto',
-                    path: AppStrings.contactEmailValue,
-                    query: 'subject=Inquiry&body=Hi Mohammed, I would like to connect regarding an opportunity.',
-                  );
-                  if (await canLaunchUrl(emailUri)) {
-                    await navigationController.myLaunchUrl(emailUri.toString());
-                  }
-                },
+              ScrollReveal(
+                delayMs: 350,
+                child: _buildContactCard(
+                  context,
+                  index: 0,
+                  icon: CupertinoIcons.mail_solid,
+                  title: AppStrings.contactEmailTitle,
+                  value: AppStrings.contactEmailValue,
+                  width: cardWidth,
+                  onTap: () async {
+                    final Uri emailUri = Uri(
+                      scheme: 'mailto',
+                      path: AppStrings.contactEmailValue,
+                      query: 'subject=Inquiry&body=Hi Mohammed, I would like to connect regarding an opportunity.',
+                    );
+                    if (await canLaunchUrl(emailUri)) {
+                      await navigationController.myLaunchUrl(emailUri.toString());
+                    }
+                  },
+                ),
               ),
-              _buildContactCard(
-                context,
-                index: 1,
-                icon: FontAwesomeIcons.linkedinIn,
-                title: AppStrings.contactLinkedInTitle,
-                value: AppStrings.contactLinkedInValue,
-                width: cardWidth,
-                onTap: () async {
-                  const url = AppStrings.linkedInUrl;
-                  if (await canLaunchUrl(Uri.parse(url))) {
-                    await navigationController.myLaunchUrl(url);
-                  }
-                },
+              ScrollReveal(
+                delayMs: 400,
+                child: _buildContactCard(
+                  context,
+                  index: 1,
+                  icon: FontAwesomeIcons.linkedinIn,
+                  title: AppStrings.contactLinkedInTitle,
+                  value: AppStrings.contactLinkedInValue,
+                  width: cardWidth,
+                  onTap: () async {
+                    const url = AppStrings.linkedInUrl;
+                    if (await canLaunchUrl(Uri.parse(url))) {
+                      await navigationController.myLaunchUrl(url);
+                    }
+                  },
+                ),
               ),
-              _buildContactCard(
-                context,
-                index: 2,
-                icon: FontAwesomeIcons.github,
-                title: AppStrings.contactGitHubTitle,
-                value: AppStrings.contactGitHubValue,
-                width: cardWidth,
-                onTap: () async {
-                  const url = AppStrings.gitHubUrl;
-                  if (await canLaunchUrl(Uri.parse(url))) {
-                    await navigationController.myLaunchUrl(url);
-                  }
-                },
+              ScrollReveal(
+                delayMs: 450,
+                child: _buildContactCard(
+                  context,
+                  index: 2,
+                  icon: FontAwesomeIcons.github,
+                  title: AppStrings.contactGitHubTitle,
+                  value: AppStrings.contactGitHubValue,
+                  width: cardWidth,
+                  onTap: () async {
+                    const url = AppStrings.gitHubUrl;
+                    if (await canLaunchUrl(Uri.parse(url))) {
+                      await navigationController.myLaunchUrl(url);
+                    }
+                  },
+                ),
               ),
-              _buildContactCard(
-                context,
-                index: 3,
-                icon: FontAwesomeIcons.whatsapp,
-                title: AppStrings.contactWhatsAppTitle,
-                value: AppStrings.contactWhatsAppValue,
-                width: cardWidth,
-                onTap: () async {
-                  const url = AppStrings.whatsAppUrl;
-                  if (await canLaunchUrl(Uri.parse(url))) {
-                    await navigationController.myLaunchUrl(url);
-                  }
-                },
+              ScrollReveal(
+                delayMs: 500,
+                child: _buildContactCard(
+                  context,
+                  index: 3,
+                  icon: FontAwesomeIcons.whatsapp,
+                  title: AppStrings.contactWhatsAppTitle,
+                  value: AppStrings.contactWhatsAppValue,
+                  width: cardWidth,
+                  onTap: () async {
+                    const url = AppStrings.whatsAppUrl;
+                    if (await canLaunchUrl(Uri.parse(url))) {
+                      await navigationController.myLaunchUrl(url);
+                    }
+                  },
+                ),
               ),
             ],
           ),
