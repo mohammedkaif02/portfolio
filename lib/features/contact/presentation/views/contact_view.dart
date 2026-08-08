@@ -84,6 +84,47 @@ class Contact extends StatelessWidget {
               ),
             ),
           ),
+          const Gap(AppDimensions.spaceL),
+
+          // Interactive Recruiter Call Schedule CTA Button
+          ScrollReveal(
+            delayMs: 280,
+            child: InkWell(
+              onTap: () => _showScheduleModal(context),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+                decoration: BoxDecoration(
+                  gradient: AppColors.brandGradient,
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.45),
+                      blurRadius: 15,
+                      offset: const Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.calendar_month_rounded, color: Colors.white, size: 20),
+                    SizedBox(width: 10),
+                    Text(
+                      AppStrings.btnScheduleCall,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(width: 6),
+                    Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 16),
+                  ],
+                ),
+              ),
+            ),
+          ),
           const Gap(AppDimensions.spaceHuge),
 
           // 1-Click Email Copy Bar
@@ -442,4 +483,140 @@ class Contact extends StatelessWidget {
       }),
     );
   }
+
+  void _showScheduleModal(BuildContext context) {
+    final isDark = !themeController.toggle.value;
+    final subjectController = TextEditingController(text: "Interview Request for Mohammed Kaif");
+    final messageController = TextEditingController(
+      text: "Hi Mohammed,\n\nWe were impressed by your Flutter & Clean Architecture portfolio. We would like to schedule an interview with you for a Flutter Developer role.\n\nPlease let us know your availability.",
+    );
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: isDark ? AppColors.darkBackground : Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(
+              color: AppColors.primary.withValues(alpha: 0.4),
+              width: 1.5,
+            ),
+          ),
+          insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 550),
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            gradient: AppColors.brandGradient,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(Icons.event_available, color: Colors.white, size: 20),
+                        ),
+                        const Gap(12),
+                        Text(
+                          "Schedule an Interview",
+                          style: TextStyle(
+                            color: isDark ? Colors.white : Colors.black87,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.close, color: isDark ? Colors.white70 : Colors.black54),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                ),
+                const Gap(16),
+                Text(
+                  "Reach out directly to schedule a technical interview or discuss Flutter Developer opportunities.",
+                  style: TextStyle(
+                    color: isDark ? Colors.white70 : Colors.black54,
+                    fontSize: 13,
+                  ),
+                ),
+                const Gap(16),
+                TextField(
+                  controller: subjectController,
+                  style: TextStyle(color: isDark ? Colors.white : Colors.black87, fontSize: 14),
+                  decoration: InputDecoration(
+                    labelText: "Subject",
+                    labelStyle: TextStyle(color: isDark ? Colors.white60 : Colors.black54),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+                    ),
+                  ),
+                ),
+                const Gap(12),
+                TextField(
+                  controller: messageController,
+                  maxLines: 4,
+                  style: TextStyle(color: isDark ? Colors.white : Colors.black87, fontSize: 13),
+                  decoration: InputDecoration(
+                    labelText: "Message Preview",
+                    labelStyle: TextStyle(color: isDark ? Colors.white60 : Colors.black54),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+                    ),
+                  ),
+                ),
+                const Gap(20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: () async {
+                          final Uri emailUri = Uri(
+                            scheme: 'mailto',
+                            path: AppStrings.contactEmailValue,
+                            query: Uri.encodeFull(
+                              'subject=${subjectController.text}&body=${messageController.text}',
+                            ),
+                          );
+                          if (await canLaunchUrl(emailUri)) {
+                            await navigationController.myLaunchUrl(emailUri.toString());
+                          }
+                          if (context.mounted) Navigator.of(context).pop();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        icon: const Icon(Icons.send_rounded, size: 18),
+                        label: const Text("Send via Email Client", style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
+
+

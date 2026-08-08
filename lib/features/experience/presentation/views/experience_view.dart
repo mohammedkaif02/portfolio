@@ -110,25 +110,50 @@ class TimelineItem extends StatelessWidget {
                   ),
                 Positioned(
                   top: 20,
-                  child: Container(
-                    width: isMobile ? 12 : 16,
-                    height: isMobile ? 12 : 16,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color:
-                          themeController.toggle.value
-                              ? Colors.white
-                              : const Color(0xff111827),
-                      border: Border.all(color: primaryColor, width: 3),
-                      boxShadow: [
-                        BoxShadow(
-                          color: primaryColor.withValues(alpha: 0.5),
-                          blurRadius: 8,
-                          spreadRadius: 2,
+                  child: index == 0
+                      ? Container(
+                          width: isMobile ? 16 : 20,
+                          height: isMobile ? 16 : 20,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: const Color(0xFF10B981),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(0xFF10B981).withValues(alpha: 0.6),
+                                blurRadius: 10,
+                                spreadRadius: 3,
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Container(
+                              width: 8,
+                              height: 8,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container(
+                          width: isMobile ? 12 : 16,
+                          height: isMobile ? 12 : 16,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: themeController.toggle.value
+                                ? Colors.white
+                                : const Color(0xff111827),
+                            border: Border.all(color: primaryColor, width: 3),
+                            boxShadow: [
+                              BoxShadow(
+                                color: primaryColor.withValues(alpha: 0.5),
+                                blurRadius: 8,
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
                 ),
               ],
             ),

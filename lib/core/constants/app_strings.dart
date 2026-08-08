@@ -10,8 +10,16 @@ class AppStrings {
   // Personal Info
   static const String name = "Mohammed Kaif";
   static const String roleTitle = "Flutter Developer | Mobile App Developer";
+  static const List<String> typingRoles = [
+    "Flutter Developer",
+    "Mobile App Engineer",
+    "Clean Architecture Specialist",
+    "UI/UX Developer",
+  ];
   static const String tagline =
-      "'Building production-ready Flutter applications with Clean Architecture, Offline-First design, and exceptional user experiences.'";
+      "I ship production-ready Flutter apps with Clean Architecture, offline-first design, and measurable impact — 6+ apps delivered, 40% faster CI/CD.";
+  static const String heroSubtitle =
+      "2+ years experience · Remote · Hybrid · Open to relocation";
 
   // Status Badge & Availability
   static const String statusAvailable = "Available for Full-Time Roles";
@@ -23,6 +31,9 @@ class AppStrings {
   // Buttons
   static const String btnConnect = "Let's Connect";
   static const String btnDownloadCV = "Download CV";
+  static const String btnHireMe = "Hire Me";
+  static const String btnViewProjects = "View Projects";
+  static const String btnScheduleCall = "Schedule an Interview";
   static const String btnLetsWorkTogether = "LET'S WORK TOGETHER";
 
   // About Section & Recruiter Metrics

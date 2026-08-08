@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:mr_portfolio/core/constants/app_dimensions.dart';
 import 'package:mr_portfolio/core/constants/app_strings.dart';
 import 'package:mr_portfolio/core/theme/app_colors.dart';
-import 'package:mr_portfolio/core/widgets/responsive.dart';
+import 'package:mr_portfolio/core/widgets/my_text.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
 
 class Footer extends StatelessWidget {
@@ -14,143 +14,65 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Responsive(
-      mobile: Container(
+    return Obx(() {
+      final isDark = !themeController.toggle.value;
+
+      return Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(AppDimensions.radiusM),
-            topRight: Radius.circular(AppDimensions.radiusM),
+          color: isDark ? AppColors.darkBackground : AppColors.lightBackground,
+          border: Border(
+            top: BorderSide(
+              color: isDark ? Colors.white12 : Colors.black12,
+              width: 1,
+            ),
           ),
-          color:
-              themeController.toggle.value == true
-                  ? AppColors.lightBackground
-                  : AppColors.darkBackground,
         ),
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Developed By ${AppStrings.name}",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-                fontSize: AppDimensions.fontBodyM,
+            // Tech Stack Badge Pill
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: isDark ? AppColors.darkChipSurface : AppColors.lightChipSurface,
+                borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+                border: Border.all(
+                  color: AppColors.primary.withValues(alpha: 0.3),
+                ),
               ),
-              textAlign: TextAlign.center,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.flutter_dash_rounded, color: AppColors.primary, size: 16),
+                  const Gap(8),
+                  MyText(
+                    text: AppStrings.footerBuiltWith,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    textColor: isDark ? Colors.white70 : Colors.black87,
+                  ),
+                ],
+              ),
             ),
-            const Gap(20),
-            Text(
-              AppStrings.footerCopyright,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-                fontSize: AppDimensions.fontBodyM,
-              ),
-              textAlign: TextAlign.center,
+            const Gap(16),
+            MyText(
+              text: "Designed & Developed by ${AppStrings.name}",
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              textColor: isDark ? Colors.white : Colors.black87,
+            ),
+            const Gap(8),
+            MyText(
+              text: AppStrings.footerCopyright,
+              fontSize: 12,
+              textColor: isDark ? Colors.white60 : Colors.black54,
             ),
           ],
         ),
-      ),
-      tablet: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(AppDimensions.radiusM),
-            topRight: Radius.circular(AppDimensions.radiusM),
-          ),
-          color:
-              themeController.toggle.value == true
-                  ? AppColors.lightBackground
-                  : AppColors.darkBackground,
-          boxShadow: const [
-            BoxShadow(
-              spreadRadius: .8,
-              blurRadius: 5,
-              offset: Offset(-5, 5),
-              color: Colors.black12,
-            ),
-            BoxShadow(
-              spreadRadius: .8,
-              blurRadius: 5,
-              offset: Offset(.5, -.5),
-              color: Colors.white24,
-            ),
-          ],
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Developed By ${AppStrings.name}",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-                fontSize: AppDimensions.fontBodyM,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const Gap(20),
-            Text(
-              AppStrings.footerCopyright,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-                fontSize: AppDimensions.fontBodyM,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-      desktop: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(AppDimensions.radiusM),
-            topRight: Radius.circular(AppDimensions.radiusM),
-          ),
-          color:
-              themeController.toggle.value == true
-                  ? AppColors.lightBackground
-                  : AppColors.darkBackground,
-          boxShadow: const [
-            BoxShadow(
-              spreadRadius: .8,
-              blurRadius: 5,
-              offset: Offset(-5, 5),
-              color: Colors.black12,
-            ),
-            BoxShadow(
-              spreadRadius: .8,
-              blurRadius: 5,
-              offset: Offset(.5, -.5),
-              color: Colors.white24,
-            ),
-          ],
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Developed By ${AppStrings.name}",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-                fontSize: AppDimensions.fontBodyM,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const Gap(20),
-            Text(
-              AppStrings.footerCopyright,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-                fontSize: AppDimensions.fontBodyM,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
+      );
+    });
   }
 }
+

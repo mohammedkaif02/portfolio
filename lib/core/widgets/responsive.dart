@@ -29,13 +29,6 @@ class Responsive extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    final double aspectRatio = getAspectRatio(context);
-
-    debugPrint(
-      'Width: ${size.width}, Height: ${size.height}, Aspect Ratio: $aspectRatio',
-    );
-
     if (isDesktop(context)) {
       return desktop;
     } else if (isTablet(context)) {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mr_portfolio/core/theme/app_colors.dart';
 
-const Color primaryColor = Color(0xff00abf0);
-const Color secondaryColor = Color(0xff081b29);
-const Color thirdColor = Color(0xff11418D);
+/// Brand-aligned color aliases used across legacy widgets.
+const Color primaryColor = AppColors.primary;
+const Color secondaryColor = AppColors.darkBackground;
+const Color thirdColor = AppColors.primaryVariant;

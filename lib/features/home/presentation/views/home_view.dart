@@ -6,8 +6,10 @@ import 'package:mr_portfolio/core/constants/app_dimensions.dart';
 import 'package:mr_portfolio/core/constants/app_strings.dart';
 import 'package:mr_portfolio/core/theme/app_colors.dart';
 import 'package:mr_portfolio/core/theme/theme_color.dart';
+import 'package:mr_portfolio/core/widgets/hero_visual.dart';
 import 'package:mr_portfolio/core/widgets/my_text.dart';
 import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
+import 'package:mr_portfolio/core/widgets/typing_text.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
 import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
 import 'package:mr_portfolio/features/cv/presentation/controllers/cv_controller.dart';
@@ -50,70 +52,78 @@ class Home extends StatelessWidget {
   }
 
   Widget _buildMobileLayout(BuildContext context, double width, double height) {
+    final isDark = !themeController.toggle.value;
+    final mobileFontSize = width < 380 ? 32.0 : (width < 480 ? 38.0 : 44.0);
+
     return Container(
       key: navigationController.homeKey,
-      height: height,
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        horizontal: width * 0.07,
+        horizontal: width * 0.06,
         vertical: AppDimensions.spaceXL,
       ),
       decoration: _backgroundDecoration(themeController.toggle.value),
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Gap(height / 6),
-            ScrollReveal(
-              delayMs: 0,
-              child: _gradientText(AppStrings.name, width * 0.09),
-            ),
-            const Gap(AppDimensions.spaceS),
-            ScrollReveal(
-              delayMs: 100,
-              child: MyText(
-                text: AppStrings.roleTitle,
-                textColor: Theme.of(context).colorScheme.onSurfaceVariant,
-                fontWeight: FontWeight.bold,
-                fontSize: width * 0.04,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Gap(60),
+              ScrollReveal(
+                delayMs: 0,
+                child: _gradientText(AppStrings.name, mobileFontSize, isDark: isDark),
               ),
-            ),
-            const Gap(AppDimensions.spaceM),
-            ScrollReveal(
-              delayMs: 200,
-              child: SizedBox(
-                width: width * 0.8,
-                child: MyText(
-                  text: AppStrings.tagline,
-                  textColor: primaryColor,
-                  textAlign: TextAlign.center,
-                  fontSize: width * 0.04,
+              const Gap(12),
+              ScrollReveal(
+                delayMs: 100,
+                child: TypingText(
+                  texts: AppStrings.typingRoles,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? const Color(0xFFC084FC) : primaryColor,
+                  ),
                 ),
               ),
-            ),
-            const Gap(AppDimensions.spaceL),
-            const ScrollReveal(
-              delayMs: 300,
-              child: StatusBadge(isCompact: true),
-            ),
-            const Gap(AppDimensions.spaceL),
-            ScrollReveal(
-              delayMs: 400,
-              child: _socialIconsRow(context, AppDimensions.iconL),
-            ),
-            const Gap(AppDimensions.spaceHuge),
-            ScrollReveal(
-              delayMs: 500,
-              child: _buttonsRow(context),
-            ),
-            const Gap(AppDimensions.spaceHuge),
-          ],
+              const Gap(16),
+              ScrollReveal(
+                delayMs: 200,
+                child: SizedBox(
+                  width: width * 0.88,
+                  child: MyText(
+                    text: AppStrings.tagline,
+                    textColor: isDark ? Colors.white.withValues(alpha: 0.88) : Colors.black87,
+                    textAlign: TextAlign.center,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+              const Gap(20),
+              const ScrollReveal(
+                delayMs: 250,
+                child: StatusBadge(isCompact: true),
+              ),
+              const Gap(24),
+              ScrollReveal(
+                delayMs: 300,
+                child: _socialIconsRow(context, AppDimensions.iconL),
+              ),
+              const Gap(30),
+              ScrollReveal(
+                delayMs: 400,
+                child: _buttonsRow(context),
+              ),
+              const Gap(40),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildTabletLayout(BuildContext context, double width, double height) {
+    final isDark = !themeController.toggle.value;
+
     return Container(
       key: navigationController.homeKey,
       height: height,
@@ -126,44 +136,46 @@ class Home extends StatelessWidget {
           children: [
             ScrollReveal(
               delayMs: 0,
-              child: _gradientText(AppStrings.name, 65),
+              child: _gradientText(AppStrings.name, 60, isDark: isDark),
             ),
-            const Gap(10),
+            const Gap(12),
             ScrollReveal(
               delayMs: 100,
-              child: MyText(
-                text: AppStrings.roleTitle,
-                textColor: Theme.of(context).colorScheme.onSurfaceVariant,
-                fontWeight: FontWeight.bold,
-                fontSize: 28,
+              child: TypingText(
+                texts: AppStrings.typingRoles,
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? const Color(0xFFC084FC) : primaryColor,
+                ),
               ),
             ),
-            const Gap(15),
+            const Gap(16),
             ScrollReveal(
               delayMs: 200,
               child: SizedBox(
-                width: width * 0.6,
+                width: width * 0.75,
                 child: MyText(
                   text: AppStrings.tagline,
-                  textColor: primaryColor,
+                  textColor: isDark ? Colors.white.withValues(alpha: 0.88) : Colors.black87,
                   textAlign: TextAlign.center,
-                  fontSize: 22,
+                  fontSize: 18,
                 ),
               ),
             ),
             const Gap(20),
             const ScrollReveal(
-              delayMs: 300,
+              delayMs: 250,
               child: StatusBadge(),
             ),
-            const Gap(30),
+            const Gap(25),
             ScrollReveal(
-              delayMs: 400,
+              delayMs: 300,
               child: _socialIconsRow(context, 26),
             ),
-            const Gap(40),
+            const Gap(35),
             ScrollReveal(
-              delayMs: 500,
+              delayMs: 400,
               child: _buttonsRow(context),
             ),
           ],
@@ -177,6 +189,8 @@ class Home extends StatelessWidget {
     double width,
     double height,
   ) {
+    final isDark = !themeController.toggle.value;
+
     return Container(
       key: navigationController.homeKey,
       height: height,
@@ -184,58 +198,75 @@ class Home extends StatelessWidget {
       decoration: _backgroundDecoration(themeController.toggle.value),
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 60),
+          padding: const EdgeInsets.symmetric(horizontal: 80),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Left Content Column
               Expanded(
+                flex: 6,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ScrollReveal(
                       delayMs: 0,
-                      child: _gradientText(AppStrings.name, 100),
+                      child: _gradientText(AppStrings.name, 76, isDark: isDark),
                     ),
                     const Gap(8),
                     ScrollReveal(
                       delayMs: 100,
-                      child: MyText(
-                        text: AppStrings.roleTitle,
-                        textColor: Theme.of(context).colorScheme.onSurfaceVariant,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
+                      child: TypingText(
+                        texts: AppStrings.typingRoles,
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? const Color(0xFFC084FC) : primaryColor,
+                        ),
                       ),
                     ),
-                    const Gap(10),
+                    const Gap(16),
                     ScrollReveal(
                       delayMs: 200,
                       child: SizedBox(
-                        width: width * 0.47,
+                        width: width * 0.45,
                         child: MyText(
                           text: AppStrings.tagline,
-                          textColor: primaryColor,
-                          textAlign: TextAlign.center,
-                          fontSize: 30,
+                          textColor: isDark ? Colors.white.withValues(alpha: 0.88) : Colors.black87,
+                          textAlign: TextAlign.start,
+                          fontSize: 18,
                         ),
                       ),
                     ),
                     const Gap(20),
                     const ScrollReveal(
-                      delayMs: 300,
+                      delayMs: 250,
                       child: StatusBadge(),
                     ),
-                    const Gap(30),
+                    const Gap(25),
                     ScrollReveal(
-                      delayMs: 400,
+                      delayMs: 300,
                       child: _socialIconsRow(context, 28),
                     ),
-                    const Gap(40),
+                    const Gap(35),
                     ScrollReveal(
-                      delayMs: 500,
+                      delayMs: 400,
                       child: _buttonsRow(context),
                     ),
                   ],
+                ),
+              ),
+
+              // Right Hero Visual Orbit Widget
+              Expanded(
+                flex: 4,
+                child: ScrollReveal(
+                  delayMs: 300,
+                  child: const Center(
+                    child: HeroVisual(size: 380),
+                  ),
                 ),
               ),
             ],
@@ -245,24 +276,37 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget _gradientText(String text, double size) {
+  Widget _gradientText(String text, double size, {bool isDark = true}) {
     return ShaderMask(
       blendMode: BlendMode.srcIn,
-      shaderCallback:
-          (bounds) => const LinearGradient(
-            colors: [
-              Color(0xff7037d8),
-              Color(0xff7241ea),
-              Color(0xff793eea),
-              Color(0xff8334e2),
-              Color(0xff9233ea),
-            ],
-          ).createShader(const Rect.fromLTWH(0, 0, 400, 100)),
-      child: MyText(
-        text: text,
-        fontSize: size,
-        fontWeight: FontWeight.bold,
-        textColor: Colors.white,
+      shaderCallback: (bounds) {
+        final rect = Rect.fromLTWH(0, 0, bounds.width == 0 ? 300 : bounds.width, bounds.height == 0 ? 60 : bounds.height);
+        return LinearGradient(
+          colors: isDark
+              ? const [
+                  Color(0xFFE9D5FF), // Luminous Soft Purple
+                  Color(0xFFC084FC), // Bright Lavender
+                  Color(0xFFA855F7), // Neon Purple
+                  Color(0xFF60A5FA), // Electric Cyan Blue
+                ]
+              : const [
+                  Color(0xFF5B21B6), // Deep Royal Violet
+                  Color(0xFF7C3AED), // Rich Purple
+                  Color(0xFF1D4ED8), // Deep Blue
+                ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ).createShader(rect);
+      },
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: size,
+          fontWeight: FontWeight.w900,
+          letterSpacing: -0.5,
+          color: Colors.white,
+        ),
       ),
     );
   }

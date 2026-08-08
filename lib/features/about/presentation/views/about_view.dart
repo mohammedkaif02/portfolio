@@ -357,7 +357,7 @@ class _MetricCardState extends State<MetricCard> {
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedScale(
-        scale: _isHovered ? 1.03 : 1.0,
+        scale: _isHovered ? 1.04 : 1.0,
         duration: const Duration(milliseconds: 180),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -367,18 +367,18 @@ class _MetricCardState extends State<MetricCard> {
             borderRadius: BorderRadius.circular(AppDimensions.radiusM),
             border: Border.all(
               color: _isHovered
-                  ? widget.accentColor.withValues(alpha: 0.6)
-                  : (isDark ? Colors.white12 : Colors.black12),
-              width: 1.2,
+                  ? widget.accentColor
+                  : (isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.08)),
+              width: 1.5,
             ),
             boxShadow: [
               BoxShadow(
                 color: _isHovered
-                    ? widget.accentColor.withValues(alpha: 0.25)
+                    ? widget.accentColor.withValues(alpha: 0.35)
                     : (isDark
                         ? Colors.black.withValues(alpha: 0.2)
                         : Colors.black.withValues(alpha: 0.04)),
-                blurRadius: _isHovered ? 14 : 6,
+                blurRadius: _isHovered ? 16 : 6,
                 offset: const Offset(0, 4),
               ),
             ],
@@ -389,23 +389,30 @@ class _MetricCardState extends State<MetricCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    widget.icon,
-                    color: widget.accentColor,
-                    size: 20,
+                  Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: widget.accentColor.withValues(alpha: 0.15),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      widget.icon,
+                      color: widget.accentColor,
+                      size: 18,
+                    ),
                   ),
-                  const Gap(6),
+                  const Gap(8),
                   Text(
                     widget.value,
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: isDark ? Colors.white : Colors.black87,
                     ),
                   ),
                 ],
               ),
-              const Gap(4),
+              const Gap(6),
               Text(
                 widget.label,
                 textAlign: TextAlign.center,
@@ -413,7 +420,7 @@ class _MetricCardState extends State<MetricCard> {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 11,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                   color: isDark ? Colors.white60 : Colors.black54,
                 ),
               ),
@@ -423,6 +430,7 @@ class _MetricCardState extends State<MetricCard> {
       ),
     );
   }
+
 }
 
 // --- FEATURE CARD WIDGET ---

@@ -218,11 +218,15 @@ class _ProjectCardState extends State<ProjectCard> {
                       topLeft: Radius.circular(AppDimensions.radiusL),
                       topRight: Radius.circular(AppDimensions.radiusL),
                     ),
-                    child: Image.asset(
-                      project.image,
-                      height: 190,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
+                    child: AnimatedScale(
+                      scale: _isHovered ? 1.06 : 1.0,
+                      duration: const Duration(milliseconds: 250),
+                      child: Image.asset(
+                        project.image,
+                        height: 190,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Positioned.fill(

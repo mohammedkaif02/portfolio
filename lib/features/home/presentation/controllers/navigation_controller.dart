@@ -8,6 +8,7 @@ class NavigationController extends GetxController {
   RxString selectedNavItem = "Home".obs;
   RxString hoverNavItem = "".obs;
   RxBool isButtonVisible = false.obs;
+  RxDouble scrollProgress = 0.0.obs;
 
   // Global Keys for Sections
   final GlobalKey homeKey = GlobalKey();
@@ -41,6 +42,9 @@ class NavigationController extends GetxController {
     super.onInit();
     scrollController.addListener(() {
       isButtonVisible.value = scrollController.offset > 100;
+      final maxScroll = scrollController.position.maxScrollExtent;
+      scrollProgress.value =
+          maxScroll > 0 ? (scrollController.offset / maxScroll).clamp(0.0, 1.0) : 0.0;
     });
     scrollController.addListener(_onScroll);
   }
