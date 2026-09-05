@@ -12,7 +12,7 @@
 
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Mohammed Kaif | Flutter Developer Portfolio">
+    <meta property="og:title" content="Mohammed Kaif | Flutter Developer & Mobile App Engineer">
     <meta property="og:description" content="Building production-ready Flutter applications with Clean Architecture, Offline-First design, and exceptional user experiences.">
     <meta property="og:image" content="assets/img/uiux.png">
 
@@ -27,8 +27,173 @@
 
     <title>Mohammed Kaif | Flutter Developer & Mobile App Engineer</title>
     <link href="manifest.json" rel="manifest">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0B0F19;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow: hidden;
+        }
+
+        #app-loader {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1E1B4B 0%, #0B0F19 70%);
+            z-index: 99999;
+            transition: opacity 0.4s ease-out;
+            pointer-events: auto;
+        }
+
+        #app-loader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .monogram-container {
+            position: relative;
+            width: 86px;
+            height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: #7241EA;
+            border-right-color: #38BDF8;
+            animation: spinRing 2s linear infinite;
+        }
+
+        .pulse-glow {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(114, 65, 234, 0.45) 0%, transparent 70%);
+            animation: pulseAura 2.2s ease-in-out infinite alternate;
+        }
+
+        .badge-core {
+            position: relative;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7241EA, #38BDF8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            box-shadow: 0 0 25px rgba(114, 65, 234, 0.6);
+        }
+
+        .loader-title {
+            margin-top: 24px;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .loader-subtitle {
+            margin-top: 6px;
+            color: #94A3B8;
+            font-size: 12px;
+            letter-spacing: 0.2px;
+        }
+
+        .progress-bar {
+            margin-top: 18px;
+            width: 140px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-line {
+            position: absolute;
+            height: 100%;
+            width: 40%;
+            background: linear-gradient(90deg, #7241EA, #38BDF8);
+            border-radius: 10px;
+            animation: shimmerLine 1.6s ease-in-out infinite;
+        }
+
+        @keyframes spinRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseAura {
+            0% { transform: scale(0.92); opacity: 0.6; }
+            100% { transform: scale(1.15); opacity: 1.0; }
+        }
+
+        @keyframes shimmerLine {
+            0% { left: -40%; }
+            100% { left: 100%; }
+        }
+    </style>
 </head>
 <body>
-<script async src="flutter_bootstrap.js"></script>
+    <div id="app-loader">
+        <div class="monogram-container">
+            <div class="pulse-glow"></div>
+            <div class="pulse-ring"></div>
+            <div class="badge-core">MK</div>
+        </div>
+        <div class="loader-title">Mohammed Kaif</div>
+        <div class="loader-subtitle">Loading Flutter Experience...</div>
+        <div class="progress-bar">
+            <div class="progress-line"></div>
+        </div>
+    </div>
+
+    <script>
+        function dismissAppLoader() {
+            var loader = document.getElementById('app-loader');
+            if (loader && !loader.classList.contains('fade-out')) {
+                loader.classList.add('fade-out');
+                setTimeout(function() {
+                    if (loader.parentNode) {
+                        loader.parentNode.removeChild(loader);
+                    }
+                }, 450);
+            }
+        }
+
+        // Trigger 1: Listen for Flutter first frame event
+        window.addEventListener('flutter-first-frame', dismissAppLoader);
+
+        // Trigger 2: Observe DOM for Flutter app element injection
+        var observer = new MutationObserver(function(mutations, obs) {
+            if (document.querySelector('flutter-view') || 
+                document.querySelector('flt-glass-pane') ||
+                document.querySelector('flt-renderer') ||
+                document.querySelector('canvas')) {
+                dismissAppLoader();
+                obs.disconnect();
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Trigger 3: Resilient fallback timeout (max 2.5s) so loader never hangs
+        setTimeout(dismissAppLoader, 2500);
+    </script>
+
+    <script async src="flutter_bootstrap.js"></script>
 </body>
 </html>

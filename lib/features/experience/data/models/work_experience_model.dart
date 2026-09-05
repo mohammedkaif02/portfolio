@@ -1,19 +1,41 @@
-class WorkExperienceItem {
-  final String role;
-  final String company;
-  final String duration;
-  final String location;
-  final bool isRemote;
-  final List<String> bulletPoints;
-  final List<String> technologies;
+import 'package:portfolio/features/experience/domain/entities/work_experience_entity.dart';
 
-  WorkExperienceItem({
-    required this.role,
-    required this.company,
-    required this.duration,
-    required this.location,
-    required this.isRemote,
-    required this.bulletPoints,
-    required this.technologies,
+class WorkExperienceModel extends WorkExperienceEntity {
+  const WorkExperienceModel({
+    required super.role,
+    required super.company,
+    required super.duration,
+    required super.location,
+    required super.isRemote,
+    required super.bulletPoints,
+    required super.technologies,
   });
+
+  factory WorkExperienceModel.fromJson(Map<String, dynamic> json) {
+    return WorkExperienceModel(
+      role: json['role'] as String? ?? '',
+      company: json['company'] as String? ?? '',
+      duration: json['duration'] as String? ?? '',
+      location: json['location'] as String? ?? '',
+      isRemote: json['isRemote'] as bool? ?? false,
+      bulletPoints: List<String>.from(json['bulletPoints'] ?? []),
+      technologies: List<String>.from(json['technologies'] ?? []),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'role': role,
+      'company': company,
+      'duration': duration,
+      'location': location,
+      'isRemote': isRemote,
+      'bulletPoints': bulletPoints,
+      'technologies': technologies,
+    };
+  }
+
+  WorkExperienceEntity toEntity() => this;
 }
+
+typedef WorkExperienceItem = WorkExperienceEntity;

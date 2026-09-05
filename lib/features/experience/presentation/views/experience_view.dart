@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:mr_portfolio/core/constants/app_dimensions.dart';
-import 'package:mr_portfolio/core/constants/app_strings.dart';
-import 'package:mr_portfolio/core/constants/static_data.dart';
-import 'package:mr_portfolio/core/theme/app_colors.dart';
-import 'package:mr_portfolio/core/theme/theme_color.dart';
-import 'package:mr_portfolio/core/widgets/my_text.dart';
-import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
-import 'package:mr_portfolio/core/widgets/section_header.dart';
-import 'package:mr_portfolio/features/experience/data/models/work_experience_model.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
+import 'package:portfolio/core/constants/app_dimensions.dart';
+import 'package:portfolio/core/constants/app_strings.dart';
+import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/theme/theme_color.dart';
+import 'package:portfolio/core/widgets/my_text.dart';
+import 'package:portfolio/core/widgets/scroll_reveal.dart';
+import 'package:portfolio/core/widgets/section_header.dart';
+import 'package:portfolio/features/experience/domain/entities/work_experience_entity.dart';
+import 'package:portfolio/features/experience/presentation/controllers/experience_controller.dart';
+import 'package:portfolio/features/home/presentation/controllers/navigation_controller.dart';
+import 'package:portfolio/features/home/presentation/controllers/theme_controller.dart';
 
 class Experience extends StatelessWidget {
   Experience({super.key});
 
-  final NavigationController navigationController = Get.find();
-  final ThemeController themeController = Get.find();
+  final NavigationController navigationController =
+      Get.find<NavigationController>();
+  final ThemeController themeController = Get.find<ThemeController>();
+  final ExperienceController experienceController =
+      Get.find<ExperienceController>();
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     double horizontalPadding =
-        width < AppDimensions.breakpointMobile ? AppDimensions.spaceXL : (width < AppDimensions.breakpointTablet ? 50.0 : 150.0);
-
-    final experienceList = StaticData.experienceList;
+        width < AppDimensions.breakpointMobile
+            ? AppDimensions.spaceXL
+            : (width < AppDimensions.breakpointTablet ? 50.0 : 150.0);
 
     return Container(
       key: navigationController.experienceKey,
@@ -36,32 +39,52 @@ class Experience extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.symmetric(
         horizontal: horizontalPadding,
-        vertical: width < AppDimensions.breakpointMobile ? AppDimensions.spaceHuge : AppDimensions.spaceSection,
+        vertical:
+            width < AppDimensions.breakpointMobile
+                ? AppDimensions.spaceHuge
+                : AppDimensions.spaceSection,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const ScrollReveal(child: SectionHeader(title: AppStrings.navExperience)),
-          Gap(width < AppDimensions.breakpointMobile ? AppDimensions.spaceHuge : 60),
-
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: experienceList.length,
-            itemBuilder: (context, index) {
-              final item = experienceList[index];
-              return ScrollReveal(
-                delayMs: index * 150,
-                child: TimelineItem(
-                  item: item,
-                  isFirst: index == 0,
-                  isLast: index == experienceList.length - 1,
-                  index: index,
-                  themeController: themeController,
-                ),
-              );
-            },
+          const ScrollReveal(
+            child: SectionHeader(title: AppStrings.navExperience),
           ),
+          Gap(
+            width < AppDimensions.breakpointMobile
+                ? AppDimensions.spaceHuge
+                : 60,
+          ),
+
+          Obx(() {
+            if (experienceController.isLoading.value) {
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 40),
+                child: CircularProgressIndicator(color: AppColors.primary),
+              );
+            }
+
+            final experienceList = experienceController.experiences;
+
+            return ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: experienceList.length,
+              itemBuilder: (context, index) {
+                final item = experienceList[index];
+                return ScrollReveal(
+                  delayMs: index * 150,
+                  child: TimelineItem(
+                    item: item,
+                    isFirst: index == 0,
+                    isLast: index == experienceList.length - 1,
+                    index: index,
+                    themeController: themeController,
+                  ),
+                );
+              },
+            );
+          }),
         ],
       ),
     );
@@ -69,7 +92,7 @@ class Experience extends StatelessWidget {
 }
 
 class TimelineItem extends StatelessWidget {
-  final WorkExperienceItem item;
+  final WorkExperienceEntity item;
   final bool isFirst;
   final bool isLast;
   final int index;
@@ -110,50 +133,54 @@ class TimelineItem extends StatelessWidget {
                   ),
                 Positioned(
                   top: 20,
-                  child: index == 0
-                      ? Container(
-                          width: isMobile ? 16 : 20,
-                          height: isMobile ? 16 : 20,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: const Color(0xFF10B981),
-                            boxShadow: [
-                              BoxShadow(
-                                color: const Color(0xFF10B981).withValues(alpha: 0.6),
-                                blurRadius: 10,
-                                spreadRadius: 3,
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child: Container(
-                              width: 8,
-                              height: 8,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
+                  child:
+                      index == 0
+                          ? Container(
+                            width: isMobile ? 16 : 20,
+                            height: isMobile ? 16 : 20,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: const Color(0xFF10B981),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(
+                                    0xFF10B981,
+                                  ).withValues(alpha: 0.6),
+                                  blurRadius: 10,
+                                  spreadRadius: 3,
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Container(
+                                width: 8,
+                                height: 8,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
+                          )
+                          : Container(
+                            width: isMobile ? 12 : 16,
+                            height: isMobile ? 12 : 16,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color:
+                                  themeController.toggle.value
+                                      ? Colors.white
+                                      : const Color(0xff111827),
+                              border: Border.all(color: primaryColor, width: 3),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: primaryColor.withValues(alpha: 0.5),
+                                  blurRadius: 8,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            ),
                           ),
-                        )
-                      : Container(
-                          width: isMobile ? 12 : 16,
-                          height: isMobile ? 12 : 16,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: themeController.toggle.value
-                                ? Colors.white
-                                : const Color(0xff111827),
-                            border: Border.all(color: primaryColor, width: 3),
-                            boxShadow: [
-                              BoxShadow(
-                                color: primaryColor.withValues(alpha: 0.5),
-                                blurRadius: 8,
-                                spreadRadius: 2,
-                              ),
-                            ],
-                          ),
-                        ),
                 ),
               ],
             ),
@@ -174,7 +201,7 @@ class TimelineItem extends StatelessWidget {
 }
 
 class HoverExperienceCard extends StatefulWidget {
-  final WorkExperienceItem item;
+  final WorkExperienceEntity item;
   final ThemeController themeController;
 
   const HoverExperienceCard({
@@ -254,62 +281,66 @@ class _HoverExperienceCardState extends State<HoverExperienceCard> {
 
               isMobile
                   ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MyText(
-                          text: widget.item.company,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          textColor: primaryColor,
-                        ),
-                        const Gap(4),
-                        Row(
-                          children: [
-                            Icon(
-                              widget.item.isRemote
-                                  ? Icons.home_work_outlined
-                                  : Icons.location_on_outlined,
-                              size: 14,
-                              color: Colors.grey,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MyText(
+                        text: widget.item.company,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        textColor: primaryColor,
+                      ),
+                      const Gap(4),
+                      Row(
+                        children: [
+                          Icon(
+                            widget.item.isRemote
+                                ? Icons.home_work_outlined
+                                : Icons.location_on_outlined,
+                            size: 14,
+                            color: Colors.grey,
+                          ),
+                          const Gap(4),
+                          Expanded(
+                            child: MyText(
+                              text: widget.item.location,
+                              fontSize: 12,
+                              textColor: Colors.grey,
                             ),
-                            const Gap(4),
-                            Expanded(
-                              child: MyText(
-                                  text: widget.item.location,
-                                  fontSize: 12,
-                                  textColor: Colors.grey,
-                                ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
                   : Row(
-                      children: [
-                        MyText(
-                          text: widget.item.company,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          textColor: primaryColor,
-                        ),
-                        const Gap(8),
-                        const MyText(text: "•", textColor: Colors.grey, fontSize: 14),
-                        const Gap(8),
-                        Icon(
-                          widget.item.isRemote
-                              ? Icons.home_work_outlined
-                              : Icons.location_on_outlined,
-                          size: 14,
-                          color: Colors.grey,
-                        ),
-                        const Gap(4),
-                        MyText(
-                          text: widget.item.location,
-                          fontSize: 14,
-                          textColor: Colors.grey,
-                        ),
-                      ],
-                    ),
+                    children: [
+                      MyText(
+                        text: widget.item.company,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        textColor: primaryColor,
+                      ),
+                      const Gap(8),
+                      const MyText(
+                        text: "•",
+                        textColor: Colors.grey,
+                        fontSize: 14,
+                      ),
+                      const Gap(8),
+                      Icon(
+                        widget.item.isRemote
+                            ? Icons.home_work_outlined
+                            : Icons.location_on_outlined,
+                        size: 14,
+                        color: Colors.grey,
+                      ),
+                      const Gap(4),
+                      MyText(
+                        text: widget.item.location,
+                        fontSize: 14,
+                        textColor: Colors.grey,
+                      ),
+                    ],
+                  ),
               const Gap(12),
               Divider(
                 color:

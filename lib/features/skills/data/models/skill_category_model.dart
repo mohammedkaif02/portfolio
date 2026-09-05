@@ -1,19 +1,16 @@
-import 'package:flutter/material.dart';
+import 'package:portfolio/features/skills/domain/entities/skill_category_entity.dart';
 
-class SkillCategory {
-  final IconData icon;
-  final Color color;
-  final String title;
-  final String? tag;
-  final List<String> skills;
-  final List<String> logo;
-
-  SkillCategory({
-    required this.icon,
-    required this.color,
-    required this.title,
-    this.tag,
-    required this.skills,
-    required this.logo,
+class SkillCategoryModel extends SkillCategoryEntity {
+  const SkillCategoryModel({
+    required super.icon,
+    required super.color,
+    required super.title,
+    super.tag,
+    required super.skills,
+    required super.logo,
   });
+
+  SkillCategoryEntity toEntity() => this;
 }
+
+typedef SkillCategory = SkillCategoryEntity;

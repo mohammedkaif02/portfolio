@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mr_portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/theme/app_colors.dart';
 
 const lightColorScheme = ColorScheme(
   brightness: Brightness.light,
@@ -91,6 +91,7 @@ final ThemeData lightTheme = ThemeData(
     elevation: 0,
   ),
   fontFamily: 'Poppins',
+  fontFamilyFallback: const ['Roboto', 'Arial', 'sans-serif'],
 );
 
 final ThemeData darkTheme = ThemeData(
@@ -103,4 +104,5 @@ final ThemeData darkTheme = ThemeData(
     elevation: 0,
   ),
   fontFamily: 'Poppins',
+  fontFamilyFallback: const ['Roboto', 'Arial', 'sans-serif'],
 );

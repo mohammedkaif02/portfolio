@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:mr_portfolio/core/constants/app_dimensions.dart';
-import 'package:mr_portfolio/core/constants/app_strings.dart';
-import 'package:mr_portfolio/core/theme/app_colors.dart';
-import 'package:mr_portfolio/core/widgets/my_text.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
+import 'package:portfolio/core/constants/app_dimensions.dart';
+import 'package:portfolio/core/constants/app_strings.dart';
+import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/widgets/my_text.dart';
+import 'package:portfolio/features/home/presentation/controllers/theme_controller.dart';
 
 class Footer extends StatelessWidget {
   Footer({super.key});
@@ -36,7 +36,10 @@ class Footer extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkChipSurface : AppColors.lightChipSurface,
+                color:
+                    isDark
+                        ? AppColors.darkChipSurface
+                        : AppColors.lightChipSurface,
                 borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
                 border: Border.all(
                   color: AppColors.primary.withValues(alpha: 0.3),
@@ -45,7 +48,11 @@ class Footer extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.flutter_dash_rounded, color: AppColors.primary, size: 16),
+                  const Icon(
+                    Icons.flutter_dash_rounded,
+                    color: AppColors.primary,
+                    size: 16,
+                  ),
                   const Gap(8),
                   MyText(
                     text: AppStrings.footerBuiltWith,
@@ -75,4 +82,3 @@ class Footer extends StatelessWidget {
     });
   }
 }
-

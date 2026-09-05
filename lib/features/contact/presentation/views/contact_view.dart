@@ -4,14 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:mr_portfolio/core/constants/app_dimensions.dart';
-import 'package:mr_portfolio/core/constants/app_strings.dart';
-import 'package:mr_portfolio/core/theme/app_colors.dart';
-import 'package:mr_portfolio/core/widgets/my_text.dart';
-import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
-import 'package:mr_portfolio/core/widgets/section_header.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
+import 'package:portfolio/core/constants/app_dimensions.dart';
+import 'package:portfolio/core/constants/app_strings.dart';
+import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/widgets/my_text.dart';
+import 'package:portfolio/core/widgets/scroll_reveal.dart';
+import 'package:portfolio/core/widgets/section_header.dart';
+import 'package:portfolio/features/home/presentation/controllers/navigation_controller.dart';
+import 'package:portfolio/features/home/presentation/controllers/theme_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Contact extends StatelessWidget {
@@ -30,22 +30,27 @@ class Contact extends StatelessWidget {
 
     final double subtitleFontSize = isMobile ? 15 : (isPageTablet ? 18 : 22);
     final double headlineFontSize = isMobile ? 36 : (isPageTablet ? 60 : 100);
-    final double cardWidth = isMobile ? width * 0.85 : (isPageTablet ? width * 0.42 : 280);
+    final double cardWidth =
+        isMobile ? width * 0.85 : (isPageTablet ? width * 0.42 : 280);
 
     return Container(
       key: navigationController.contactKey,
       width: double.infinity,
-      color: themeController.toggle.value
-          ? AppColors.lightCardSurface
-          : AppColors.darkCardSurface,
+      color:
+          themeController.toggle.value
+              ? AppColors.lightCardSurface
+              : AppColors.darkCardSurface,
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? AppDimensions.spaceL : (isPageTablet ? 50 : 120),
-        vertical: isMobile ? AppDimensions.spaceHuge : AppDimensions.spaceSection,
+        vertical:
+            isMobile ? AppDimensions.spaceHuge : AppDimensions.spaceSection,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const ScrollReveal(child: SectionHeader(title: AppStrings.navContact)),
+          const ScrollReveal(
+            child: SectionHeader(title: AppStrings.navContact),
+          ),
           const Gap(AppDimensions.spaceXL),
 
           // Availability & Logistics recruiting banner card
@@ -93,7 +98,10 @@ class Contact extends StatelessWidget {
               onTap: () => _showScheduleModal(context),
               borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 28,
+                  vertical: 14,
+                ),
                 decoration: BoxDecoration(
                   gradient: AppColors.brandGradient,
                   borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
@@ -108,7 +116,11 @@ class Contact extends StatelessWidget {
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.calendar_month_rounded, color: Colors.white, size: 20),
+                    Icon(
+                      Icons.calendar_month_rounded,
+                      color: Colors.white,
+                      size: 20,
+                    ),
                     SizedBox(width: 10),
                     Text(
                       AppStrings.btnScheduleCall,
@@ -119,7 +131,11 @@ class Contact extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 6),
-                    Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 16),
+                    Icon(
+                      Icons.arrow_forward_rounded,
+                      color: Colors.white,
+                      size: 16,
+                    ),
                   ],
                 ),
               ),
@@ -153,10 +169,13 @@ class Contact extends StatelessWidget {
                     final Uri emailUri = Uri(
                       scheme: 'mailto',
                       path: AppStrings.contactEmailValue,
-                      query: 'subject=Inquiry&body=Hi Mohammed, I would like to connect regarding an opportunity.',
+                      query:
+                          'subject=Inquiry&body=Hi Mohammed, I would like to connect regarding an opportunity.',
                     );
                     if (await canLaunchUrl(emailUri)) {
-                      await navigationController.myLaunchUrl(emailUri.toString());
+                      await navigationController.myLaunchUrl(
+                        emailUri.toString(),
+                      );
                     }
                   },
                 ),
@@ -219,7 +238,11 @@ class Contact extends StatelessWidget {
     );
   }
 
-  Widget _buildAvailabilityCard(BuildContext context, bool isMobile, bool isTablet) {
+  Widget _buildAvailabilityCard(
+    BuildContext context,
+    bool isMobile,
+    bool isTablet,
+  ) {
     final isDark = !themeController.toggle.value;
 
     return Container(
@@ -283,9 +306,7 @@ class Contact extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark ? AppColors.darkChipSurface : AppColors.lightChipSurface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
-        border: Border.all(
-          color: isDark ? Colors.white12 : Colors.black12,
-        ),
+        border: Border.all(color: isDark ? Colors.white12 : Colors.black12),
       ),
       child: MyText(
         text: label,
@@ -419,16 +440,20 @@ class Contact extends StatelessWidget {
               borderRadius: BorderRadius.circular(AppDimensions.radiusL),
               color: isDark ? AppColors.darkBackground : Colors.white,
               border: Border.all(
-                color: isHovered
-                    ? AppColors.primary.withValues(alpha: 0.6)
-                    : (isDark ? Colors.white12 : Colors.black12),
+                color:
+                    isHovered
+                        ? AppColors.primary.withValues(alpha: 0.6)
+                        : (isDark ? Colors.white12 : Colors.black12),
                 width: 1.5,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: isHovered
-                      ? AppColors.primary.withValues(alpha: 0.35)
-                      : (isDark ? Colors.black26 : Colors.black.withValues(alpha: 0.05)),
+                  color:
+                      isHovered
+                          ? AppColors.primary.withValues(alpha: 0.35)
+                          : (isDark
+                              ? Colors.black26
+                              : Colors.black.withValues(alpha: 0.05)),
                   blurRadius: isHovered ? 18 : 8,
                   offset: const Offset(0, 5),
                 ),
@@ -444,15 +469,18 @@ class Contact extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: AppColors.brandGradient,
-                      boxShadow: isHovered
-                          ? [
-                              BoxShadow(
-                                color: AppColors.primary.withValues(alpha: 0.6),
-                                blurRadius: 15,
-                                spreadRadius: 2,
-                              ),
-                            ]
-                          : [],
+                      boxShadow:
+                          isHovered
+                              ? [
+                                BoxShadow(
+                                  color: AppColors.primary.withValues(
+                                    alpha: 0.6,
+                                  ),
+                                  blurRadius: 15,
+                                  spreadRadius: 2,
+                                ),
+                              ]
+                              : [],
                     ),
                     padding: const EdgeInsets.all(14.0),
                     child: Icon(icon, color: Colors.white, size: 24),
@@ -486,9 +514,12 @@ class Contact extends StatelessWidget {
 
   void _showScheduleModal(BuildContext context) {
     final isDark = !themeController.toggle.value;
-    final subjectController = TextEditingController(text: "Interview Request for Mohammed Kaif");
+    final subjectController = TextEditingController(
+      text: "Interview Request for Mohammed Kaif",
+    );
     final messageController = TextEditingController(
-      text: "Hi Mohammed,\n\nWe were impressed by your Flutter & Clean Architecture portfolio. We would like to schedule an interview with you for a Flutter Developer role.\n\nPlease let us know your availability.",
+      text:
+          "Hi Mohammed,\n\nWe were impressed by your Flutter & Clean Architecture portfolio. We would like to schedule an interview with you for a Flutter Developer role.\n\nPlease let us know your availability.",
     );
 
     showDialog(
@@ -503,7 +534,10 @@ class Contact extends StatelessWidget {
               width: 1.5,
             ),
           ),
-          insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 24,
+          ),
           child: Container(
             constraints: const BoxConstraints(maxWidth: 550),
             padding: const EdgeInsets.all(24),
@@ -522,7 +556,11 @@ class Contact extends StatelessWidget {
                             gradient: AppColors.brandGradient,
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(Icons.event_available, color: Colors.white, size: 20),
+                          child: const Icon(
+                            Icons.event_available,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                         ),
                         const Gap(12),
                         Text(
@@ -536,7 +574,10 @@ class Contact extends StatelessWidget {
                       ],
                     ),
                     IconButton(
-                      icon: Icon(Icons.close, color: isDark ? Colors.white70 : Colors.black54),
+                      icon: Icon(
+                        Icons.close,
+                        color: isDark ? Colors.white70 : Colors.black54,
+                      ),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],
@@ -552,14 +593,24 @@ class Contact extends StatelessWidget {
                 const Gap(16),
                 TextField(
                   controller: subjectController,
-                  style: TextStyle(color: isDark ? Colors.white : Colors.black87, fontSize: 14),
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black87,
+                    fontSize: 14,
+                  ),
                   decoration: InputDecoration(
                     labelText: "Subject",
-                    labelStyle: TextStyle(color: isDark ? Colors.white60 : Colors.black54),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    labelStyle: TextStyle(
+                      color: isDark ? Colors.white60 : Colors.black54,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+                      borderSide: const BorderSide(
+                        color: AppColors.primary,
+                        width: 1.5,
+                      ),
                     ),
                   ),
                 ),
@@ -567,14 +618,24 @@ class Contact extends StatelessWidget {
                 TextField(
                   controller: messageController,
                   maxLines: 4,
-                  style: TextStyle(color: isDark ? Colors.white : Colors.black87, fontSize: 13),
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black87,
+                    fontSize: 13,
+                  ),
                   decoration: InputDecoration(
                     labelText: "Message Preview",
-                    labelStyle: TextStyle(color: isDark ? Colors.white60 : Colors.black54),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    labelStyle: TextStyle(
+                      color: isDark ? Colors.white60 : Colors.black54,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+                      borderSide: const BorderSide(
+                        color: AppColors.primary,
+                        width: 1.5,
+                      ),
                     ),
                   ),
                 ),
@@ -592,7 +653,9 @@ class Contact extends StatelessWidget {
                             ),
                           );
                           if (await canLaunchUrl(emailUri)) {
-                            await navigationController.myLaunchUrl(emailUri.toString());
+                            await navigationController.myLaunchUrl(
+                              emailUri.toString(),
+                            );
                           }
                           if (context.mounted) Navigator.of(context).pop();
                         },
@@ -605,7 +668,10 @@ class Contact extends StatelessWidget {
                           ),
                         ),
                         icon: const Icon(Icons.send_rounded, size: 18),
-                        label: const Text("Send via Email Client", style: TextStyle(fontWeight: FontWeight.bold)),
+                        label: const Text(
+                          "Send via Email Client",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ],
@@ -618,5 +684,3 @@ class Contact extends StatelessWidget {
     );
   }
 }
-
-

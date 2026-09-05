@@ -2,33 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:mr_portfolio/core/constants/app_dimensions.dart';
-import 'package:mr_portfolio/core/constants/app_strings.dart';
-import 'package:mr_portfolio/core/theme/app_colors.dart';
-import 'package:mr_portfolio/core/theme/theme_color.dart';
-import 'package:mr_portfolio/core/widgets/hero_visual.dart';
-import 'package:mr_portfolio/core/widgets/my_text.dart';
-import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
-import 'package:mr_portfolio/core/widgets/typing_text.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
-import 'package:mr_portfolio/features/cv/presentation/controllers/cv_controller.dart';
-import 'package:mr_portfolio/features/cv/domain/usecases/download_cv_usecase.dart';
-import 'package:mr_portfolio/features/cv/data/repositories/location_repository_impl.dart';
-import 'package:mr_portfolio/features/home/presentation/widgets/status_badge.dart';
+import 'package:portfolio/core/constants/app_dimensions.dart';
+import 'package:portfolio/core/constants/app_strings.dart';
+import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/theme/theme_color.dart';
+import 'package:portfolio/core/widgets/hero_visual.dart';
+import 'package:portfolio/core/widgets/my_text.dart';
+import 'package:portfolio/core/widgets/scroll_reveal.dart';
+import 'package:portfolio/core/widgets/typing_text.dart';
+import 'package:portfolio/features/home/presentation/controllers/navigation_controller.dart';
+import 'package:portfolio/features/home/presentation/controllers/theme_controller.dart';
+import 'package:portfolio/features/cv/presentation/controllers/cv_controller.dart';
+import 'package:portfolio/features/home/presentation/widgets/status_badge.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
 
-  final NavigationController navigationController = Get.find();
-  final ThemeController themeController = Get.find();
-  final CVController cvController = Get.put(
-    CVController(
-      downloadCVUseCase: DownloadCVUseCase(
-        locationRepository: LocationRepositoryImpl(),
-      ),
-    ),
-  );
+  final NavigationController navigationController =
+      Get.find<NavigationController>();
+  final ThemeController themeController = Get.find<ThemeController>();
+  final CVController cvController = Get.find<CVController>();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +64,11 @@ class Home extends StatelessWidget {
               const Gap(60),
               ScrollReveal(
                 delayMs: 0,
-                child: _gradientText(AppStrings.name, mobileFontSize, isDark: isDark),
+                child: _gradientText(
+                  AppStrings.name,
+                  mobileFontSize,
+                  isDark: isDark,
+                ),
               ),
               const Gap(12),
               ScrollReveal(
@@ -92,7 +89,10 @@ class Home extends StatelessWidget {
                   width: width * 0.88,
                   child: MyText(
                     text: AppStrings.tagline,
-                    textColor: isDark ? Colors.white.withValues(alpha: 0.88) : Colors.black87,
+                    textColor:
+                        isDark
+                            ? Colors.white.withValues(alpha: 0.88)
+                            : Colors.black87,
                     textAlign: TextAlign.center,
                     fontSize: 14,
                   ),
@@ -109,10 +109,7 @@ class Home extends StatelessWidget {
                 child: _socialIconsRow(context, AppDimensions.iconL),
               ),
               const Gap(30),
-              ScrollReveal(
-                delayMs: 400,
-                child: _buttonsRow(context),
-              ),
+              ScrollReveal(delayMs: 400, child: _buttonsRow(context)),
               const Gap(40),
             ],
           ),
@@ -157,27 +154,21 @@ class Home extends StatelessWidget {
                 width: width * 0.75,
                 child: MyText(
                   text: AppStrings.tagline,
-                  textColor: isDark ? Colors.white.withValues(alpha: 0.88) : Colors.black87,
+                  textColor:
+                      isDark
+                          ? Colors.white.withValues(alpha: 0.88)
+                          : Colors.black87,
                   textAlign: TextAlign.center,
                   fontSize: 18,
                 ),
               ),
             ),
             const Gap(20),
-            const ScrollReveal(
-              delayMs: 250,
-              child: StatusBadge(),
-            ),
+            const ScrollReveal(delayMs: 250, child: StatusBadge()),
             const Gap(25),
-            ScrollReveal(
-              delayMs: 300,
-              child: _socialIconsRow(context, 26),
-            ),
+            ScrollReveal(delayMs: 300, child: _socialIconsRow(context, 26)),
             const Gap(35),
-            ScrollReveal(
-              delayMs: 400,
-              child: _buttonsRow(context),
-            ),
+            ScrollReveal(delayMs: 400, child: _buttonsRow(context)),
           ],
         ),
       ),
@@ -223,7 +214,8 @@ class Home extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
-                          color: isDark ? const Color(0xFFC084FC) : primaryColor,
+                          color:
+                              isDark ? const Color(0xFFC084FC) : primaryColor,
                         ),
                       ),
                     ),
@@ -234,27 +226,24 @@ class Home extends StatelessWidget {
                         width: width * 0.45,
                         child: MyText(
                           text: AppStrings.tagline,
-                          textColor: isDark ? Colors.white.withValues(alpha: 0.88) : Colors.black87,
+                          textColor:
+                              isDark
+                                  ? Colors.white.withValues(alpha: 0.88)
+                                  : Colors.black87,
                           textAlign: TextAlign.start,
                           fontSize: 18,
                         ),
                       ),
                     ),
                     const Gap(20),
-                    const ScrollReveal(
-                      delayMs: 250,
-                      child: StatusBadge(),
-                    ),
+                    const ScrollReveal(delayMs: 250, child: StatusBadge()),
                     const Gap(25),
                     ScrollReveal(
                       delayMs: 300,
                       child: _socialIconsRow(context, 28),
                     ),
                     const Gap(35),
-                    ScrollReveal(
-                      delayMs: 400,
-                      child: _buttonsRow(context),
-                    ),
+                    ScrollReveal(delayMs: 400, child: _buttonsRow(context)),
                   ],
                 ),
               ),
@@ -264,9 +253,7 @@ class Home extends StatelessWidget {
                 flex: 4,
                 child: ScrollReveal(
                   delayMs: 300,
-                  child: const Center(
-                    child: HeroVisual(size: 380),
-                  ),
+                  child: const Center(child: HeroVisual(size: 380)),
                 ),
               ),
             ],
@@ -280,20 +267,26 @@ class Home extends StatelessWidget {
     return ShaderMask(
       blendMode: BlendMode.srcIn,
       shaderCallback: (bounds) {
-        final rect = Rect.fromLTWH(0, 0, bounds.width == 0 ? 300 : bounds.width, bounds.height == 0 ? 60 : bounds.height);
+        final rect = Rect.fromLTWH(
+          0,
+          0,
+          bounds.width == 0 ? 300 : bounds.width,
+          bounds.height == 0 ? 60 : bounds.height,
+        );
         return LinearGradient(
-          colors: isDark
-              ? const [
-                  Color(0xFFE9D5FF), // Luminous Soft Purple
-                  Color(0xFFC084FC), // Bright Lavender
-                  Color(0xFFA855F7), // Neon Purple
-                  Color(0xFF60A5FA), // Electric Cyan Blue
-                ]
-              : const [
-                  Color(0xFF5B21B6), // Deep Royal Violet
-                  Color(0xFF7C3AED), // Rich Purple
-                  Color(0xFF1D4ED8), // Deep Blue
-                ],
+          colors:
+              isDark
+                  ? const [
+                    Color(0xFFE9D5FF), // Luminous Soft Purple
+                    Color(0xFFC084FC), // Bright Lavender
+                    Color(0xFFA855F7), // Neon Purple
+                    Color(0xFF60A5FA), // Electric Cyan Blue
+                  ]
+                  : const [
+                    Color(0xFF5B21B6), // Deep Royal Violet
+                    Color(0xFF7C3AED), // Rich Purple
+                    Color(0xFF1D4ED8), // Deep Blue
+                  ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ).createShader(rect);

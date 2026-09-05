@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:mr_portfolio/core/constants/app_dimensions.dart';
-import 'package:mr_portfolio/core/constants/app_strings.dart';
-import 'package:mr_portfolio/core/constants/static_data.dart';
-import 'package:mr_portfolio/core/theme/app_colors.dart';
-import 'package:mr_portfolio/core/widgets/my_text.dart';
-import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
-import 'package:mr_portfolio/core/widgets/section_header.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
-import 'package:mr_portfolio/features/skills/data/models/skill_category_model.dart';
-import 'package:mr_portfolio/features/skills/presentation/controllers/skills_controller.dart';
+import 'package:portfolio/core/constants/app_dimensions.dart';
+import 'package:portfolio/core/constants/app_strings.dart';
+import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/widgets/my_text.dart';
+import 'package:portfolio/core/widgets/scroll_reveal.dart';
+import 'package:portfolio/core/widgets/section_header.dart';
+import 'package:portfolio/features/home/presentation/controllers/navigation_controller.dart';
+import 'package:portfolio/features/home/presentation/controllers/theme_controller.dart';
+import 'package:portfolio/features/skills/data/models/skill_category_model.dart';
+import 'package:portfolio/features/skills/presentation/controllers/skills_controller.dart';
 
 class MySkills extends StatelessWidget {
   MySkills({super.key});
 
-  final NavigationController navigationController = Get.find();
-  final ThemeController themeController = Get.find();
-  final SkillsController skillsController = Get.put(SkillsController());
+  final NavigationController navigationController =
+      Get.find<NavigationController>();
+  final ThemeController themeController = Get.find<ThemeController>();
+  final SkillsController skillsController = Get.find<SkillsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,24 +28,24 @@ class MySkills extends StatelessWidget {
         width >= AppDimensions.breakpointMobile &&
         width < AppDimensions.breakpointTablet;
 
-    final double horizontalPadding = isMobile
-        ? AppDimensions.spaceL
-        : isTablet
-        ? 40.0
-        : 120.0;
-    final double verticalPadding = isMobile
-        ? AppDimensions.spaceHuge
-        : AppDimensions.spaceSection;
+    final double horizontalPadding =
+        isMobile
+            ? AppDimensions.spaceL
+            : isTablet
+            ? 40.0
+            : 120.0;
+    final double verticalPadding =
+        isMobile ? AppDimensions.spaceHuge : AppDimensions.spaceSection;
 
-    final skillData = StaticData.skillData;
     final int crossAxisCount = isMobile ? 1 : (isTablet ? 2 : 3);
 
     return Container(
       key: navigationController.whatIDoKey,
       width: double.infinity,
-      color: themeController.toggle.value
-          ? AppColors.lightCardSurface
-          : AppColors.darkCardSurface,
+      color:
+          themeController.toggle.value
+              ? AppColors.lightCardSurface
+              : AppColors.darkCardSurface,
       padding: EdgeInsets.symmetric(
         horizontal: horizontalPadding,
         vertical: verticalPadding,
@@ -56,40 +56,49 @@ class MySkills extends StatelessWidget {
           const ScrollReveal(child: SectionHeader(title: AppStrings.navSkills)),
           const Gap(AppDimensions.spaceL),
 
-          // Top Engineering Competency Banner
           ScrollReveal(
             delayMs: 100,
             child: _buildCompetencyBanner(context, isMobile),
           ),
           const Gap(AppDimensions.spaceHuge),
 
-          // Skills Grid Layout
-          LayoutBuilder(
-            builder: (context, constraints) {
-              return GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount,
-                  crossAxisSpacing: isMobile ? 20 : 30,
-                  mainAxisSpacing: isMobile ? 20 : 30,
-                  mainAxisExtent: isMobile ? 280 : (isTablet ? 270 : 275),
-                ),
-                itemCount: skillData.length,
-                itemBuilder: (context, index) {
-                  return ScrollReveal(
-                    delayMs: index * 100,
-                    child: SkillCategoryCard(
-                      index: index,
-                      category: skillData[index],
-                      themeController: themeController,
-                      skillsController: skillsController,
-                    ),
-                  );
-                },
+          Obx(() {
+            if (skillsController.isLoading.value) {
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 40),
+                child: CircularProgressIndicator(color: AppColors.primary),
               );
-            },
-          ),
+            }
+
+            final skillData = skillsController.skills;
+
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                return GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: crossAxisCount,
+                    crossAxisSpacing: isMobile ? 20 : 30,
+                    mainAxisSpacing: isMobile ? 20 : 30,
+                    mainAxisExtent: isMobile ? 280 : (isTablet ? 270 : 275),
+                  ),
+                  itemCount: skillData.length,
+                  itemBuilder: (context, index) {
+                    return ScrollReveal(
+                      delayMs: index * 100,
+                      child: SkillCategoryCard(
+                        index: index,
+                        category: skillData[index],
+                        themeController: themeController,
+                        skillsController: skillsController,
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          }),
         ],
       ),
     );
@@ -203,20 +212,22 @@ class _SkillCategoryCardState extends State<SkillCategoryCard> {
             color: isDark ? AppColors.darkBackground : Colors.white,
             borderRadius: BorderRadius.circular(AppDimensions.radiusL),
             border: Border.all(
-              color: _isHovered
-                  ? color.withValues(alpha: 0.65)
-                  : (isDark
-                      ? Colors.white.withValues(alpha: 0.08)
-                      : Colors.black.withValues(alpha: 0.06)),
+              color:
+                  _isHovered
+                      ? color.withValues(alpha: 0.65)
+                      : (isDark
+                          ? Colors.white.withValues(alpha: 0.08)
+                          : Colors.black.withValues(alpha: 0.06)),
               width: 1.5,
             ),
             boxShadow: [
               BoxShadow(
-                color: _isHovered
-                    ? color.withValues(alpha: 0.35)
-                    : (isDark
-                        ? Colors.black.withValues(alpha: 0.3)
-                        : Colors.black.withValues(alpha: 0.06)),
+                color:
+                    _isHovered
+                        ? color.withValues(alpha: 0.35)
+                        : (isDark
+                            ? Colors.black.withValues(alpha: 0.3)
+                            : Colors.black.withValues(alpha: 0.06)),
                 blurRadius: _isHovered ? 20 : 10,
                 spreadRadius: _isHovered ? 2 : 0,
                 offset: const Offset(0, 6),
@@ -226,7 +237,6 @@ class _SkillCategoryCardState extends State<SkillCategoryCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Category Header Row
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -234,10 +244,10 @@ class _SkillCategoryCardState extends State<SkillCategoryCard> {
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: color.withValues(alpha: 0.15),
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-                      border: Border.all(
-                        color: color.withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(
+                        AppDimensions.radiusM,
                       ),
+                      border: Border.all(color: color.withValues(alpha: 0.3)),
                     ),
                     child: Icon(category.icon, color: color, size: 24),
                   ),
@@ -261,8 +271,9 @@ class _SkillCategoryCardState extends State<SkillCategoryCard> {
                             ),
                             decoration: BoxDecoration(
                               color: color.withValues(alpha: 0.12),
-                              borderRadius:
-                                  BorderRadius.circular(AppDimensions.radiusPill),
+                              borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusPill,
+                              ),
                             ),
                             child: Text(
                               category.tag!,
@@ -278,12 +289,18 @@ class _SkillCategoryCardState extends State<SkillCategoryCard> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 9,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                      color: isDark
-                          ? AppColors.darkChipSurface
-                          : AppColors.lightChipSurface,
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+                      color:
+                          isDark
+                              ? AppColors.darkChipSurface
+                              : AppColors.lightChipSurface,
+                      borderRadius: BorderRadius.circular(
+                        AppDimensions.radiusPill,
+                      ),
                     ),
                     child: Text(
                       "${category.skills.length}",
@@ -298,7 +315,6 @@ class _SkillCategoryCardState extends State<SkillCategoryCard> {
               ),
               const Gap(AppDimensions.spaceL),
 
-              // Interactive Skill Chips Wrap
               Expanded(
                 child: SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
@@ -357,46 +373,46 @@ class _SkillChipItemState extends State<SkillChipItem> {
           duration: const Duration(milliseconds: 150),
           padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
           decoration: BoxDecoration(
-            color: widget.isDark
-                ? (_isHovered
-                    ? widget.accentColor.withValues(alpha: 0.18)
-                    : AppColors.darkChipSurface)
-                : (_isHovered
-                    ? widget.accentColor.withValues(alpha: 0.12)
-                    : AppColors.lightChipSurface),
+            color:
+                widget.isDark
+                    ? (_isHovered
+                        ? widget.accentColor.withValues(alpha: 0.18)
+                        : AppColors.darkChipSurface)
+                    : (_isHovered
+                        ? widget.accentColor.withValues(alpha: 0.12)
+                        : AppColors.lightChipSurface),
             borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
             border: Border.all(
-              color: _isHovered
-                  ? widget.accentColor.withValues(alpha: 0.6)
-                  : (widget.isDark ? Colors.white12 : Colors.black12),
+              color:
+                  _isHovered
+                      ? widget.accentColor.withValues(alpha: 0.6)
+                      : (widget.isDark ? Colors.white12 : Colors.black12),
               width: 1,
             ),
-            boxShadow: _isHovered
-                ? [
-                    BoxShadow(
-                      color: widget.accentColor.withValues(alpha: 0.25),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ]
-                : [],
+            boxShadow:
+                _isHovered
+                    ? [
+                      BoxShadow(
+                        color: widget.accentColor.withValues(alpha: 0.25),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ]
+                    : [],
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset(
-                widget.logoPath,
-                height: 15,
-                width: 15,
-              ),
+              Image.asset(widget.logoPath, height: 15, width: 15),
               const Gap(6),
               MyText(
                 text: widget.name,
                 fontSize: 12,
                 fontWeight: _isHovered ? FontWeight.bold : FontWeight.w500,
-                textColor: widget.isDark
-                    ? (_isHovered ? Colors.white : Colors.grey[200])
-                    : (_isHovered ? Colors.black : Colors.black87),
+                textColor:
+                    widget.isDark
+                        ? (_isHovered ? Colors.white : Colors.grey[200])
+                        : (_isHovered ? Colors.black : Colors.black87),
               ),
             ],
           ),

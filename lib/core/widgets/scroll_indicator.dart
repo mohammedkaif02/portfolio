@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mr_portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/theme/app_colors.dart';
 
 class ScrollIndicator extends StatefulWidget {
   final VoidCallback onTap;
@@ -23,9 +23,10 @@ class _ScrollIndicatorState extends State<ScrollIndicator>
       duration: const Duration(milliseconds: 1200),
     )..repeat(reverse: true);
 
-    _bounce = Tween<double>(begin: 0, end: 10).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _bounce = Tween<double>(
+      begin: 0,
+      end: 10,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override

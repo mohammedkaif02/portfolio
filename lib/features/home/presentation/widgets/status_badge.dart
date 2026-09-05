@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mr_portfolio/core/constants/app_dimensions.dart';
-import 'package:mr_portfolio/core/constants/app_strings.dart';
-import 'package:mr_portfolio/core/widgets/my_text.dart';
+import 'package:portfolio/core/constants/app_dimensions.dart';
+import 'package:portfolio/core/constants/app_strings.dart';
+import 'package:portfolio/core/widgets/my_text.dart';
 
 class StatusBadge extends StatefulWidget {
   final bool isCompact;
 
-  const StatusBadge({
-    super.key,
-    this.isCompact = false,
-  });
+  const StatusBadge({super.key, this.isCompact = false});
 
   @override
   State<StatusBadge> createState() => _StatusBadgeState();
@@ -87,9 +84,9 @@ class _StatusBadgeState extends State<StatusBadge>
                       height: 14,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: const Color(0xFF10B981).withValues(
-                          alpha: _glowAnimation.value * 0.5,
-                        ),
+                        color: const Color(
+                          0xFF10B981,
+                        ).withValues(alpha: _glowAnimation.value * 0.5),
                       ),
                     ),
                     Transform.scale(
@@ -102,9 +99,9 @@ class _StatusBadgeState extends State<StatusBadge>
                           color: const Color(0xFF10B981),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF10B981).withValues(
-                                alpha: _glowAnimation.value,
-                              ),
+                              color: const Color(
+                                0xFF10B981,
+                              ).withValues(alpha: _glowAnimation.value),
                               blurRadius: 6,
                               spreadRadius: 2,
                             ),
@@ -121,38 +118,38 @@ class _StatusBadgeState extends State<StatusBadge>
             // Status & Work Types Label
             useCompact
                 ? const MyText(
-                    text: AppStrings.statusAvailable,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    textColor: Color(0xFF10B981),
-                  )
+                  text: AppStrings.statusAvailable,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  textColor: Color(0xFF10B981),
+                )
                 : Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const MyText(
-                        text: AppStrings.statusAvailable,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        textColor: Color(0xFF10B981),
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const MyText(
+                      text: AppStrings.statusAvailable,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      textColor: Color(0xFF10B981),
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xFF10B981),
                       ),
-                      const SizedBox(width: 8),
-                      Container(
-                        width: 4,
-                        height: 4,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xFF10B981),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      const MyText(
-                        text: AppStrings.statusWorkTypes,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        textColor: Colors.grey,
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(width: 8),
+                    const MyText(
+                      text: AppStrings.statusWorkTypes,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      textColor: Colors.grey,
+                    ),
+                  ],
+                ),
           ],
         ),
       ),

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
+import 'package:portfolio/features/home/presentation/controllers/navigation_controller.dart';
 
 class ScrollReveal extends StatefulWidget {
   final Widget child;

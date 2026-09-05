@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:mr_portfolio/core/constants/app_dimensions.dart';
-import 'package:mr_portfolio/core/constants/app_strings.dart';
-import 'package:mr_portfolio/core/theme/app_colors.dart';
-import 'package:mr_portfolio/core/widgets/my_text.dart';
-import 'package:mr_portfolio/core/widgets/responsive.dart';
-import 'package:mr_portfolio/core/widgets/scroll_reveal.dart';
-import 'package:mr_portfolio/core/widgets/section_header.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/navigation_controller.dart';
-import 'package:mr_portfolio/features/home/presentation/controllers/theme_controller.dart';
+import 'package:portfolio/core/constants/app_assets.dart';
+import 'package:portfolio/core/constants/app_dimensions.dart';
+import 'package:portfolio/core/constants/app_strings.dart';
+import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/widgets/my_text.dart';
+import 'package:portfolio/core/widgets/responsive.dart';
+import 'package:portfolio/core/widgets/scroll_reveal.dart';
+import 'package:portfolio/core/widgets/section_header.dart';
+import 'package:portfolio/features/home/presentation/controllers/navigation_controller.dart';
+import 'package:portfolio/features/home/presentation/controllers/theme_controller.dart';
 
 class About extends StatelessWidget {
   About({super.key});
@@ -35,9 +36,10 @@ class About extends StatelessWidget {
         horizontal: AppDimensions.spaceL,
         vertical: 60,
       ),
-      color: themeController.toggle.value
-          ? AppColors.lightCardSurface
-          : AppColors.darkCardSurface,
+      color:
+          themeController.toggle.value
+              ? AppColors.lightCardSurface
+              : AppColors.darkCardSurface,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -67,9 +69,10 @@ class About extends StatelessWidget {
       key: navigationController.aboutUsKey,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
-      color: themeController.toggle.value
-          ? AppColors.lightCardSurface
-          : AppColors.darkCardSurface,
+      color:
+          themeController.toggle.value
+              ? AppColors.lightCardSurface
+              : AppColors.darkCardSurface,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -94,9 +97,10 @@ class About extends StatelessWidget {
       key: navigationController.aboutUsKey,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 100),
-      color: themeController.toggle.value
-          ? AppColors.lightCardSurface
-          : AppColors.darkCardSurface,
+      color:
+          themeController.toggle.value
+              ? AppColors.lightCardSurface
+              : AppColors.darkCardSurface,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -121,7 +125,11 @@ class About extends StatelessWidget {
               const Gap(40),
               Expanded(
                 flex: 1,
-                child: _buildFeatureGrid(context, crossAxisCount: 2, isMobile: false),
+                child: _buildFeatureGrid(
+                  context,
+                  crossAxisCount: 2,
+                  isMobile: false,
+                ),
               ),
             ],
           ),
@@ -208,9 +216,10 @@ class About extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: isDark
-                ? AppColors.primary.withValues(alpha: 0.12)
-                : Colors.black.withValues(alpha: 0.05),
+            color:
+                isDark
+                    ? AppColors.primary.withValues(alpha: 0.12)
+                    : Colors.black.withValues(alpha: 0.05),
             blurRadius: 20,
             spreadRadius: 1,
             offset: const Offset(0, 5),
@@ -271,22 +280,22 @@ class About extends StatelessWidget {
   }) {
     final features = [
       {
-        'icon': AppStrings.mobileIconPath,
+        'icon': AppAssets.mobile,
         'title': AppStrings.featureFlutterDevelopmentTitle,
         'sub': AppStrings.featureFlutterDevelopmentSub,
       },
       {
-        'icon': AppStrings.backendIconPath,
+        'icon': AppAssets.backend,
         'title': AppStrings.featureBackendTitle,
         'sub': AppStrings.featureBackendSub,
       },
       {
-        'icon': AppStrings.googlePlayIconPath,
+        'icon': AppAssets.googlePlay,
         'title': AppStrings.featureDeployTitle,
         'sub': AppStrings.featureDeploySub,
       },
       {
-        'icon': AppStrings.uiUxIconPath,
+        'icon': AppAssets.uiUx,
         'title': AppStrings.featureUiUxTitle,
         'sub': AppStrings.featureUiUxSub,
       },
@@ -366,18 +375,22 @@ class _MetricCardState extends State<MetricCard> {
             color: isDark ? AppColors.darkBackground : Colors.white,
             borderRadius: BorderRadius.circular(AppDimensions.radiusM),
             border: Border.all(
-              color: _isHovered
-                  ? widget.accentColor
-                  : (isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.08)),
+              color:
+                  _isHovered
+                      ? widget.accentColor
+                      : (isDark
+                          ? Colors.white.withValues(alpha: 0.1)
+                          : Colors.black.withValues(alpha: 0.08)),
               width: 1.5,
             ),
             boxShadow: [
               BoxShadow(
-                color: _isHovered
-                    ? widget.accentColor.withValues(alpha: 0.35)
-                    : (isDark
-                        ? Colors.black.withValues(alpha: 0.2)
-                        : Colors.black.withValues(alpha: 0.04)),
+                color:
+                    _isHovered
+                        ? widget.accentColor.withValues(alpha: 0.35)
+                        : (isDark
+                            ? Colors.black.withValues(alpha: 0.2)
+                            : Colors.black.withValues(alpha: 0.04)),
                 blurRadius: _isHovered ? 16 : 6,
                 offset: const Offset(0, 4),
               ),
@@ -430,7 +443,6 @@ class _MetricCardState extends State<MetricCard> {
       ),
     );
   }
-
 }
 
 // --- FEATURE CARD WIDGET ---
@@ -484,18 +496,20 @@ class _FeatureCardState extends State<FeatureCard> {
             borderRadius: BorderRadius.circular(AppDimensions.radiusM),
             color: isDark ? AppColors.darkBackground : Colors.white,
             border: Border.all(
-              color: _isHovered
-                  ? AppColors.primary.withValues(alpha: 0.6)
-                  : (isDark ? Colors.white12 : Colors.black12),
+              color:
+                  _isHovered
+                      ? AppColors.primary.withValues(alpha: 0.6)
+                      : (isDark ? Colors.white12 : Colors.black12),
               width: 1.2,
             ),
             boxShadow: [
               BoxShadow(
-                color: _isHovered
-                    ? AppColors.primary.withValues(alpha: 0.3)
-                    : (isDark
-                        ? Colors.black.withValues(alpha: 0.25)
-                        : Colors.black.withValues(alpha: 0.05)),
+                color:
+                    _isHovered
+                        ? AppColors.primary.withValues(alpha: 0.3)
+                        : (isDark
+                            ? Colors.black.withValues(alpha: 0.25)
+                            : Colors.black.withValues(alpha: 0.05)),
                 blurRadius: _isHovered ? 15 : 8,
                 offset: const Offset(0, 4),
               ),
@@ -509,14 +523,15 @@ class _FeatureCardState extends State<FeatureCard> {
                 decoration: BoxDecoration(
                   gradient: AppColors.brandGradient,
                   borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-                  boxShadow: _isHovered
-                      ? [
-                          BoxShadow(
-                            color: AppColors.primary.withValues(alpha: 0.5),
-                            blurRadius: 10,
-                          ),
-                        ]
-                      : [],
+                  boxShadow:
+                      _isHovered
+                          ? [
+                            BoxShadow(
+                              color: AppColors.primary.withValues(alpha: 0.5),
+                              blurRadius: 10,
+                            ),
+                          ]
+                          : [],
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mr_portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/theme/app_colors.dart';
 
 class HeroBackground extends StatefulWidget {
   final bool isLight;
@@ -43,7 +43,9 @@ class _HeroBackgroundState extends State<HeroBackground>
               right: -60 + (t * 30),
               child: _orb(
                 size: 320,
-                color: AppColors.primary.withValues(alpha: widget.isLight ? 0.18 : 0.22),
+                color: AppColors.primary.withValues(
+                  alpha: widget.isLight ? 0.18 : 0.22,
+                ),
               ),
             ),
             Positioned(
@@ -51,7 +53,9 @@ class _HeroBackgroundState extends State<HeroBackground>
               left: -80 + (t * 25),
               child: _orb(
                 size: 280,
-                color: AppColors.secondary.withValues(alpha: widget.isLight ? 0.14 : 0.18),
+                color: AppColors.secondary.withValues(
+                  alpha: widget.isLight ? 0.14 : 0.18,
+                ),
               ),
             ),
             Positioned(
@@ -59,7 +63,9 @@ class _HeroBackgroundState extends State<HeroBackground>
               left: width(context) * 0.45 + (t * 20),
               child: _orb(
                 size: 160,
-                color: AppColors.accent.withValues(alpha: widget.isLight ? 0.10 : 0.14),
+                color: AppColors.accent.withValues(
+                  alpha: widget.isLight ? 0.10 : 0.14,
+                ),
               ),
             ),
           ],

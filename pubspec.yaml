@@ -1,4 +1,4 @@
-name: mr_portfolio
+name: portfolio
 description: "Mohammed Kaif - Portfolio showcasing production-grade Flutter, Clean Architecture, and Mobile App Development."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -44,11 +44,6 @@ dependencies:
   open_file: ^3.5.10
   permission_handler: ^11.4.0
   font_awesome_flutter: ^10.8.0
-  video_player: ^2.9.3
-  firebase_storage: ^12.4.4
-  firebase_core: ^3.12.1
-  chewie: ^1.10.0
-  flutter_timezone: ^4.1.0
   light_dark_theme_toggle: ^1.1.2
 
 dev_dependencies:

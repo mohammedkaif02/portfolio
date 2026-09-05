@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mr_portfolio/core/theme/theme_color.dart';
+import 'package:portfolio/core/theme/theme_color.dart';
 
 class MyText extends StatelessWidget {
   final String text;

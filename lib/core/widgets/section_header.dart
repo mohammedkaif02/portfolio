@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mr_portfolio/core/constants/app_dimensions.dart';
-import 'package:mr_portfolio/core/theme/app_colors.dart';
-import 'package:mr_portfolio/core/widgets/my_text.dart';
+import 'package:portfolio/core/constants/app_dimensions.dart';
+import 'package:portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/widgets/my_text.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
   final double? fontSize;
 
-  const SectionHeader({
-    super.key,
-    required this.title,
-    this.fontSize,
-  });
+  const SectionHeader({super.key, required this.title, this.fontSize});
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final double calculatedFontSize = fontSize ??
+    final double calculatedFontSize =
+        fontSize ??
         (width < AppDimensions.breakpointMobile
             ? AppDimensions.fontSectionMobile
             : AppDimensions.fontSectionDesktop);

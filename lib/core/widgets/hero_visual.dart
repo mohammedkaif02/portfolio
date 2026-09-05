@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:mr_portfolio/core/theme/app_colors.dart';
+import 'package:portfolio/core/constants/app_assets.dart';
+import 'package:portfolio/core/theme/app_colors.dart';
 
 class HeroVisual extends StatefulWidget {
   final double size;
@@ -11,19 +12,18 @@ class HeroVisual extends StatefulWidget {
   State<HeroVisual> createState() => _HeroVisualState();
 }
 
-class _HeroVisualState extends State<HeroVisual>
-    with TickerProviderStateMixin {
+class _HeroVisualState extends State<HeroVisual> with TickerProviderStateMixin {
   late AnimationController _orbitController;
   late AnimationController _pulseController;
   late Animation<double> _pulseAnim;
 
   static const _techIcons = [
-    {'icon': 'assets/icons/flutter.png', 'label': 'Flutter'},
-    {'icon': 'assets/icons/dart.png', 'label': 'Dart'},
-    {'icon': 'assets/icons/getx.png', 'label': 'GetX'},
-    {'icon': 'assets/icons/firebase.png', 'label': 'Firebase'},
-    {'icon': 'assets/icons/figma.png', 'label': 'Figma'},
-    {'icon': 'assets/icons/github.png', 'label': 'GitHub'},
+    {'icon': AppAssets.flutter, 'label': 'Flutter'},
+    {'icon': AppAssets.dart, 'label': 'Dart'},
+    {'icon': AppAssets.getx, 'label': 'GetX'},
+    {'icon': AppAssets.firebase, 'label': 'Firebase'},
+    {'icon': AppAssets.figma, 'label': 'Figma'},
+    {'icon': AppAssets.github, 'label': 'GitHub'},
   ];
 
   @override
@@ -157,9 +157,10 @@ class _TechBubbleState extends State<_TechBubble> {
             ),
             boxShadow: [
               BoxShadow(
-                color: _isHovered
-                    ? AppColors.primary.withValues(alpha: 0.6)
-                    : AppColors.primary.withValues(alpha: 0.25),
+                color:
+                    _isHovered
+                        ? AppColors.primary.withValues(alpha: 0.6)
+                        : AppColors.primary.withValues(alpha: 0.25),
                 blurRadius: _isHovered ? 16 : 10,
                 offset: const Offset(0, 4),
               ),
@@ -186,11 +187,7 @@ class _CenterMonogramBadge extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: const LinearGradient(
-          colors: [
-            Color(0xFFC084FC),
-            Color(0xFF7241EA),
-            Color(0xFF38BDF8),
-          ],
+          colors: [Color(0xFFC084FC), Color(0xFF7241EA), Color(0xFF38BDF8)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -206,10 +203,7 @@ class _CenterMonogramBadge extends StatelessWidget {
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
           gradient: RadialGradient(
-            colors: [
-              Color(0xFF1E1B4B),
-              Color(0xFF0F172A),
-            ],
+            colors: [Color(0xFF1E1B4B), Color(0xFF0F172A)],
             center: Alignment(-0.2, -0.3),
             radius: 0.85,
           ),
@@ -235,15 +229,16 @@ class _CenterMonogramBadge extends StatelessWidget {
               children: [
                 ShaderMask(
                   blendMode: BlendMode.srcIn,
-                  shaderCallback: (bounds) => const LinearGradient(
-                    colors: [
-                      Color(0xFFE9D5FF),
-                      Color(0xFFC084FC),
-                      Color(0xFF38BDF8),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ).createShader(bounds),
+                  shaderCallback:
+                      (bounds) => const LinearGradient(
+                        colors: [
+                          Color(0xFFE9D5FF),
+                          Color(0xFFC084FC),
+                          Color(0xFF38BDF8),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ).createShader(bounds),
                   child: const Text(
                     "MK",
                     style: TextStyle(
@@ -256,7 +251,10 @@ class _CenterMonogramBadge extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 3,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF7241EA).withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(12),
@@ -268,7 +266,11 @@ class _CenterMonogramBadge extends StatelessWidget {
                   child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.code_rounded, color: Color(0xFFC084FC), size: 13),
+                      Icon(
+                        Icons.code_rounded,
+                        color: Color(0xFFC084FC),
+                        size: 13,
+                      ),
                       SizedBox(width: 4),
                       Text(
                         "FLUTTER",
@@ -290,5 +292,3 @@ class _CenterMonogramBadge extends StatelessWidget {
     );
   }
 }
-
-
