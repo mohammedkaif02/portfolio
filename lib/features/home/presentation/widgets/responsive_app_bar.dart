@@ -42,149 +42,186 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                 ),
-                child: AppBar(
-                  surfaceTintColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  foregroundColor: Colors.transparent,
-                  backgroundColor: Colors.transparent,
-                  toolbarHeight: 70,
-                  leading:
-                      isMobile
-                          ? IconButton(
-                            icon: const Icon(Icons.menu, color: primaryColor),
-                            onPressed: () => Scaffold.of(context).openDrawer(),
-                          )
-                          : null,
-                  leadingWidth: isMobile ? 56 : 0,
-                  title:
-                      isMobile
-                          ? Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Mohammed Kaif",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: isLight ? primaryColor : Colors.white,
+                child: Stack(
+                  children: [
+                    AppBar(
+                      surfaceTintColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      foregroundColor: Colors.transparent,
+                      backgroundColor: Colors.transparent,
+                      toolbarHeight: 70,
+                      leading:
+                          isMobile
+                              ? IconButton(
+                                icon: const Icon(
+                                  Icons.menu,
+                                  color: primaryColor,
                                 ),
-                              ),
-                            ],
-                          )
-                          : Row(
-                            children: [
-                              // Brand Logo Avatar Badge
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 14,
-                                  vertical: 8,
-                                ),
-                                decoration: BoxDecoration(
-                                  gradient: AppColors.brandGradient,
-                                  borderRadius: BorderRadius.circular(20),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: primaryColor.withValues(
-                                        alpha: 0.35,
-                                      ),
-                                      blurRadius: 10,
-                                    ),
-                                  ],
-                                ),
-                                child: const Row(
-                                  children: [
-                                    Icon(
-                                      Icons.code_rounded,
-                                      color: Colors.white,
-                                      size: 18,
-                                    ),
-                                    SizedBox(width: 8),
-                                    Text(
-                                      "MK",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Spacer(),
-
-                              // Navigation Items Row
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
+                                onPressed:
+                                    () => Scaffold.of(context).openDrawer(),
+                              )
+                              : null,
+                      leadingWidth: isMobile ? 56 : 0,
+                      title:
+                          isMobile
+                              ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  _navItem(
-                                    "Home",
-                                    () => navigationController.scrollToSection(
-                                      navigationController.homeKey,
-                                      "Home",
-                                    ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  _navItem(
-                                    "About",
-                                    () => navigationController.scrollToSection(
-                                      navigationController.aboutUsKey,
-                                      "About",
-                                    ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  _navItem(
-                                    "Experience",
-                                    () => navigationController.scrollToSection(
-                                      navigationController.experienceKey,
-                                      "Experience",
-                                    ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  _navItem(
-                                    "Skills",
-                                    () => navigationController.scrollToSection(
-                                      navigationController.whatIDoKey,
-                                      "Skills",
-                                    ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  _navItem(
-                                    "Projects",
-                                    () => navigationController.scrollToSection(
-                                      navigationController.projectKey,
-                                      "Projects",
-                                    ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  _navItem(
-                                    "Contact",
-                                    () => navigationController.scrollToSection(
-                                      navigationController.contactKey,
-                                      "Contact",
+                                  Text(
+                                    "Mohammed Kaif",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      color:
+                                          isLight ? primaryColor : Colors.white,
                                     ),
                                   ),
                                 ],
+                              )
+                              : Row(
+                                children: [
+                                  // Brand Logo Avatar Badge
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 14,
+                                      vertical: 8,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      gradient: AppColors.brandGradient,
+                                      borderRadius: BorderRadius.circular(20),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: primaryColor.withValues(
+                                            alpha: 0.35,
+                                          ),
+                                          blurRadius: 10,
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Row(
+                                      children: [
+                                        Icon(
+                                          Icons.code_rounded,
+                                          color: Colors.white,
+                                          size: 18,
+                                        ),
+                                        SizedBox(width: 8),
+                                        Text(
+                                          "MK",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Spacer(),
+
+                                  // Navigation Items Row
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      _navItem(
+                                        "Home",
+                                        () =>
+                                            navigationController.scrollToSection(
+                                              navigationController.homeKey,
+                                              "Home",
+                                            ),
+                                      ),
+                                      const SizedBox(width: 20),
+                                      _navItem(
+                                        "About",
+                                        () =>
+                                            navigationController.scrollToSection(
+                                              navigationController.aboutUsKey,
+                                              "About",
+                                            ),
+                                      ),
+                                      const SizedBox(width: 20),
+                                      _navItem(
+                                        "Experience",
+                                        () =>
+                                            navigationController.scrollToSection(
+                                              navigationController
+                                                  .experienceKey,
+                                              "Experience",
+                                            ),
+                                      ),
+                                      const SizedBox(width: 20),
+                                      _navItem(
+                                        "Skills",
+                                        () =>
+                                            navigationController.scrollToSection(
+                                              navigationController.whatIDoKey,
+                                              "Skills",
+                                            ),
+                                      ),
+                                      const SizedBox(width: 20),
+                                      _navItem(
+                                        "Projects",
+                                        () =>
+                                            navigationController.scrollToSection(
+                                              navigationController.projectKey,
+                                              "Projects",
+                                            ),
+                                      ),
+                                      const SizedBox(width: 20),
+                                      _navItem(
+                                        "Contact",
+                                        () =>
+                                            navigationController.scrollToSection(
+                                              navigationController.contactKey,
+                                              "Contact",
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                ],
                               ),
-                              const Spacer(),
-                            ],
-                          ),
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
+                      actions: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: Obx(() {
+                            return LightDarkThemeToggle(
+                              value: themeController.toggle.value,
+                              onChanged: (onChanged) {
+                                themeController.toggleTheme();
+                              },
+                              tooltip:
+                                  themeController.toggle.value
+                                      ? "DarkMode"
+                                      : "LightMode",
+                              color:
+                                  themeController.toggle.value
+                                      ? Colors.black87
+                                      : Colors.yellow.shade300,
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
+
+                    // Reading Scroll Progress Indicator (Sleek 2.5px Gradient Bar)
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
                       child: Obx(() {
-                        return LightDarkThemeToggle(
-                          value: themeController.toggle.value,
-                          onChanged: (onChanged) {
-                            themeController.toggleTheme();
-                          },
-                          tooltip:
-                              themeController.toggle.value
-                                  ? "DarkMode"
-                                  : "LightMode",
-                          color:
-                              themeController.toggle.value
-                                  ? Colors.black87
-                                  : Colors.yellow.shade300,
+                        final progress =
+                            navigationController.scrollProgress.value;
+                        return FractionallySizedBox(
+                          alignment: Alignment.centerLeft,
+                          widthFactor: progress,
+                          child: Container(
+                            height: 2.5,
+                            decoration: const BoxDecoration(
+                              gradient: AppColors.brandGradient,
+                            ),
+                          ),
                         );
                       }),
                     ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/core/constants/app_dimensions.dart';
-import 'package:portfolio/core/constants/app_strings.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
 import 'package:portfolio/core/widgets/my_text.dart';
 import 'package:portfolio/core/widgets/scroll_reveal.dart';
@@ -53,7 +52,14 @@ class MySkills extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const ScrollReveal(child: SectionHeader(title: AppStrings.navSkills)),
+          const ScrollReveal(
+            child: SectionHeader(
+              eyebrow: "Technical Arsenal",
+              title: "Skills & Architecture Stack",
+              subtitle:
+                  "Specialized in the modern Flutter ecosystem, reactive state engines, offline-first databases, and clean architecture.",
+            ),
+          ),
           const Gap(AppDimensions.spaceL),
 
           ScrollReveal(
@@ -81,7 +87,7 @@ class MySkills extends StatelessWidget {
                     crossAxisCount: crossAxisCount,
                     crossAxisSpacing: isMobile ? 20 : 30,
                     mainAxisSpacing: isMobile ? 20 : 30,
-                    mainAxisExtent: isMobile ? 280 : (isTablet ? 270 : 275),
+                    mainAxisExtent: isMobile ? 300 : (isTablet ? 290 : 290),
                   ),
                   itemCount: skillData.length,
                   itemBuilder: (context, index) {
@@ -134,11 +140,11 @@ class MySkills extends StatelessWidget {
           children: [
             _buildBadgeItem("📱 Cross-Platform Mobile", isDark),
             _buildBadgeDot(isDark),
-            _buildBadgeItem("🏗️ Clean Architecture & GetX", isDark),
+            _buildBadgeItem("🏗️ Clean Architecture & BLoC / Riverpod", isDark),
             _buildBadgeDot(isDark),
-            _buildBadgeItem("⚡ Offline-First & gRPC", isDark),
+            _buildBadgeItem("⚡ Offline-First, Supabase & gRPC", isDark),
             _buildBadgeDot(isDark),
-            _buildBadgeItem("🎨 Figma UI/UX Design System", isDark),
+            _buildBadgeItem("🎨 Figma & FlutterFlow Prototyping", isDark),
           ],
         ),
       ),

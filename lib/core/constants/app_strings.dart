@@ -9,13 +9,15 @@ class AppStrings {
   static const String name = "Mohammed Kaif";
   static const String roleTitle = "Flutter Developer | Mobile App Developer";
   static const List<String> typingRoles = [
-    "Flutter Developer",
+    "Flutter & Dart Developer",
     "Mobile App Engineer",
     "Clean Architecture Specialist",
-    "UI/UX Developer",
+    "BLoC & Riverpod Architect",
+    "Supabase & Offline-First Expert",
+    "UI/UX Design Systems Developer",
   ];
   static const String tagline =
-      "I ship production-ready Flutter apps with Clean Architecture, offline-first design, and measurable impact — 6+ apps delivered, 40% faster CI/CD.";
+      "I ship production-grade Flutter apps with Clean Architecture, offline-first design, and measurable impact — 6+ apps delivered, 40% faster CI/CD.";
   static const String heroSubtitle =
       "2+ years experience · Remote · Hybrid · Open to relocation";
 
@@ -42,24 +44,24 @@ class AppStrings {
   static const String metricEffLabel = "Efficiency Boost";
 
   static const String aboutParagraph1 =
-      "I'm Mohammed Kaif, a Flutter Developer with 2+ years of professional experience building scalable, production-ready Android, iOS, and Flutter Web applications. I specialize in Clean Architecture, Offline-First Architecture, GetX, gRPC, REST APIs, Firebase, Hive, and CI/CD, delivering fast, reliable, and maintainable solutions.";
+      "I'm Mohammed Kaif, a Flutter Developer with 2+ years of professional experience building scalable, production-grade Android, iOS, and Flutter Web applications. I specialize in Clean Architecture, BLoC / Cubit, Riverpod, Offline-First Architecture, Supabase, gRPC, REST APIs, and CI/CD, delivering fast, reliable, and maintainable mobile solutions.";
   static const String aboutParagraph2 =
-      "I've built enterprise applications that improve performance, accelerate development through reusable architecture, and deliver seamless user experiences. From transforming Figma designs into polished interfaces to integrating backend services, I enjoy solving complex engineering challenges with clean, scalable code.";
+      "I've built enterprise applications that improve performance, accelerate development through modular architecture, and deliver seamless user experiences. From translating Figma designs into production-ready interfaces to integrating backend services, I enjoy solving complex engineering challenges with clean, scalable code.";
   static const String aboutParagraph3 =
-      "I believe great software is built on strong architecture, thoughtful design, and continuous improvement. My goal is to create products that solve real business problems while delivering exceptional user experiences.";
+      "I believe great software is built on strong architecture, thoughtful design, and continuous improvement. My goal is to build products that solve real business problems while delivering exceptional, accessible user experiences.";
 
   static const String featureFlutterDevelopmentTitle = "Flutter Development";
   static const String featureFlutterDevelopmentSub =
-      "Building scalable Android\niOS & Flutter Web apps.";
+      "Building scalable Android,\niOS & Flutter Web apps.";
   static const String featureBackendTitle = "API & Backend Integration";
   static const String featureBackendSub =
-      "Connecting secure REST & gRPC\nAPIs with Node.js & Firebase.";
+      "Connecting secure REST & gRPC\nAPIs with Node.js & Supabase.";
   static const String featureDeployTitle = "App Deployment";
   static const String featureDeploySub =
       "Publishing production-ready\napps to Play Store and App Store.";
-  static const String featureUiUxTitle = "UI/UX Design";
+  static const String featureUiUxTitle = "UI/UX & Prototyping";
   static const String featureUiUxSub =
-      "Crafting pixel-perfect highly\nresponsive design systems.";
+      "Figma design systems &\nrapid FlutterFlow prototyping.";
 
   static const String contactSubtitle =
       "Currently seeking Flutter Developer opportunities where I can build scalable, high-quality mobile applications and contribute to impactful products.";

@@ -44,6 +44,43 @@ class Home extends StatelessWidget {
     );
   }
 
+  Widget _buildGreetingEyebrow(bool isDark) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+      decoration: BoxDecoration(
+        color: AppColors.primary.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+        border: Border.all(
+          color: AppColors.primary.withValues(alpha: 0.35),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 7,
+            height: 7,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Color(0xFF10B981),
+            ),
+          ),
+          const SizedBox(width: 8),
+          const Text(
+            "PRODUCTION FLUTTER & MOBILE ENGINEER",
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.2,
+              color: AppColors.primary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildMobileLayout(BuildContext context, double width, double height) {
     final isDark = !themeController.toggle.value;
     final mobileFontSize = width < 380 ? 32.0 : (width < 480 ? 38.0 : 44.0);
@@ -61,9 +98,14 @@ class Home extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Gap(60),
+              const Gap(50),
               ScrollReveal(
                 delayMs: 0,
+                child: _buildGreetingEyebrow(isDark),
+              ),
+              const Gap(14),
+              ScrollReveal(
+                delayMs: 50,
                 child: _gradientText(
                   AppStrings.name,
                   mobileFontSize,
@@ -84,7 +126,7 @@ class Home extends StatelessWidget {
               ),
               const Gap(16),
               ScrollReveal(
-                delayMs: 200,
+                delayMs: 150,
                 child: SizedBox(
                   width: width * 0.88,
                   child: MyText(
@@ -100,17 +142,23 @@ class Home extends StatelessWidget {
               ),
               const Gap(20),
               const ScrollReveal(
-                delayMs: 250,
+                delayMs: 200,
                 child: StatusBadge(isCompact: true),
+              ),
+              const Gap(24),
+              // Compact Orbiting Visual for Mobile
+              const ScrollReveal(
+                delayMs: 250,
+                child: HeroVisual(size: 250),
               ),
               const Gap(24),
               ScrollReveal(
                 delayMs: 300,
                 child: _socialIconsRow(context, AppDimensions.iconL),
               ),
+              const Gap(28),
+              ScrollReveal(delayMs: 350, child: _buttonsRow(context)),
               const Gap(30),
-              ScrollReveal(delayMs: 400, child: _buttonsRow(context)),
-              const Gap(40),
             ],
           ),
         ),
@@ -123,9 +171,8 @@ class Home extends StatelessWidget {
 
     return Container(
       key: navigationController.homeKey,
-      height: height,
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
       decoration: _backgroundDecoration(themeController.toggle.value),
       child: Center(
         child: Column(
@@ -133,7 +180,12 @@ class Home extends StatelessWidget {
           children: [
             ScrollReveal(
               delayMs: 0,
-              child: _gradientText(AppStrings.name, 60, isDark: isDark),
+              child: _buildGreetingEyebrow(isDark),
+            ),
+            const Gap(14),
+            ScrollReveal(
+              delayMs: 50,
+              child: _gradientText(AppStrings.name, 56, isDark: isDark),
             ),
             const Gap(12),
             ScrollReveal(
@@ -141,7 +193,7 @@ class Home extends StatelessWidget {
               child: TypingText(
                 texts: AppStrings.typingRoles,
                 style: TextStyle(
-                  fontSize: 26,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: isDark ? const Color(0xFFC084FC) : primaryColor,
                 ),
@@ -149,7 +201,7 @@ class Home extends StatelessWidget {
             ),
             const Gap(16),
             ScrollReveal(
-              delayMs: 200,
+              delayMs: 150,
               child: SizedBox(
                 width: width * 0.75,
                 child: MyText(
@@ -159,16 +211,22 @@ class Home extends StatelessWidget {
                           ? Colors.white.withValues(alpha: 0.88)
                           : Colors.black87,
                   textAlign: TextAlign.center,
-                  fontSize: 18,
+                  fontSize: 16,
                 ),
               ),
             ),
             const Gap(20),
-            const ScrollReveal(delayMs: 250, child: StatusBadge()),
+            const ScrollReveal(delayMs: 200, child: StatusBadge()),
+            const Gap(25),
+            // Orbiting Hero Visual for Tablet
+            const ScrollReveal(
+              delayMs: 250,
+              child: HeroVisual(size: 290),
+            ),
             const Gap(25),
             ScrollReveal(delayMs: 300, child: _socialIconsRow(context, 26)),
-            const Gap(35),
-            ScrollReveal(delayMs: 400, child: _buttonsRow(context)),
+            const Gap(30),
+            ScrollReveal(delayMs: 350, child: _buttonsRow(context)),
           ],
         ),
       ),
@@ -184,7 +242,7 @@ class Home extends StatelessWidget {
 
     return Container(
       key: navigationController.homeKey,
-      height: height,
+      height: height.clamp(720, 950),
       width: double.infinity,
       decoration: _backgroundDecoration(themeController.toggle.value),
       child: Center(
@@ -203,7 +261,12 @@ class Home extends StatelessWidget {
                   children: [
                     ScrollReveal(
                       delayMs: 0,
-                      child: _gradientText(AppStrings.name, 76, isDark: isDark),
+                      child: _buildGreetingEyebrow(isDark),
+                    ),
+                    const Gap(14),
+                    ScrollReveal(
+                      delayMs: 50,
+                      child: _gradientText(AppStrings.name, 72, isDark: isDark),
                     ),
                     const Gap(8),
                     ScrollReveal(
@@ -212,7 +275,7 @@ class Home extends StatelessWidget {
                         texts: AppStrings.typingRoles,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          fontSize: 32,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                           color:
                               isDark ? const Color(0xFFC084FC) : primaryColor,
@@ -221,7 +284,7 @@ class Home extends StatelessWidget {
                     ),
                     const Gap(16),
                     ScrollReveal(
-                      delayMs: 200,
+                      delayMs: 150,
                       child: SizedBox(
                         width: width * 0.45,
                         child: MyText(
@@ -231,19 +294,19 @@ class Home extends StatelessWidget {
                                   ? Colors.white.withValues(alpha: 0.88)
                                   : Colors.black87,
                           textAlign: TextAlign.start,
-                          fontSize: 18,
+                          fontSize: 17,
                         ),
                       ),
                     ),
                     const Gap(20),
-                    const ScrollReveal(delayMs: 250, child: StatusBadge()),
+                    const ScrollReveal(delayMs: 200, child: StatusBadge()),
                     const Gap(25),
                     ScrollReveal(
-                      delayMs: 300,
-                      child: _socialIconsRow(context, 28),
+                      delayMs: 250,
+                      child: _socialIconsRow(context, 26),
                     ),
                     const Gap(35),
-                    ScrollReveal(delayMs: 400, child: _buttonsRow(context)),
+                    ScrollReveal(delayMs: 300, child: _buttonsRow(context)),
                   ],
                 ),
               ),
@@ -252,7 +315,7 @@ class Home extends StatelessWidget {
               Expanded(
                 flex: 4,
                 child: ScrollReveal(
-                  delayMs: 300,
+                  delayMs: 200,
                   child: const Center(child: HeroVisual(size: 380)),
                 ),
               ),
@@ -277,15 +340,15 @@ class Home extends StatelessWidget {
           colors:
               isDark
                   ? const [
-                    Color(0xFFE9D5FF), // Luminous Soft Purple
-                    Color(0xFFC084FC), // Bright Lavender
-                    Color(0xFFA855F7), // Neon Purple
-                    Color(0xFF60A5FA), // Electric Cyan Blue
+                    Color(0xFFE9D5FF),
+                    Color(0xFFC084FC),
+                    Color(0xFFA855F7),
+                    Color(0xFF60A5FA),
                   ]
                   : const [
-                    Color(0xFF5B21B6), // Deep Royal Violet
-                    Color(0xFF7C3AED), // Rich Purple
-                    Color(0xFF1D4ED8), // Deep Blue
+                    Color(0xFF5B21B6),
+                    Color(0xFF7C3AED),
+                    Color(0xFF1D4ED8),
                   ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -293,22 +356,20 @@ class Home extends StatelessWidget {
       },
       child: Text(
         text,
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.start,
         style: TextStyle(
           fontSize: size,
           fontWeight: FontWeight.w900,
           letterSpacing: -0.5,
-          color: Colors.white,
+          height: 1.1,
         ),
       ),
     );
   }
 
   Widget _socialIconsRow(BuildContext context, double iconSize) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      spacing: 30,
-      runSpacing: 20,
+    return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         _hoverableIcon(
           context,
@@ -347,7 +408,7 @@ class Home extends StatelessWidget {
 
   Widget _hoverableIcon(
     BuildContext context, {
-    required IconData icon,
+    required dynamic icon,
     required RxBool hoverValue,
     required VoidCallback onTap,
   }) {
@@ -360,13 +421,14 @@ class Home extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 250),
+            margin: const EdgeInsets.only(right: 14),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               boxShadow:
                   hoverValue.value
                       ? [
                         BoxShadow(
-                          color: primaryColor.withValues(alpha: 0.4),
+                          color: primaryColor.withValues(alpha: 0.45),
                           blurRadius: 15,
                           spreadRadius: 2,
                         ),
@@ -382,7 +444,7 @@ class Home extends StatelessWidget {
                 themeController.toggle.value,
                 hoverValue.value,
                 icon,
-                20,
+                18,
               ),
             ),
           ),
@@ -394,13 +456,13 @@ class Home extends StatelessWidget {
   Widget _buttonsRow(BuildContext context) {
     return Wrap(
       alignment: WrapAlignment.center,
-      spacing: 40,
-      runSpacing: 20,
+      spacing: 16,
+      runSpacing: 14,
       children: [
         _hoverableButton(
           text: AppStrings.btnConnect,
-          bgColor: primaryColor,
-          textColor: Colors.white,
+          icon: Icons.chat_bubble_outline_rounded,
+          isPrimary: true,
           hoverValue: navigationController.isHoveringConnect,
           onTap:
               () => navigationController.scrollToSection(
@@ -410,11 +472,10 @@ class Home extends StatelessWidget {
         ),
         _hoverableButton(
           text: AppStrings.btnDownloadCV,
-          bgColor: Colors.transparent,
-          textColor: primaryColor,
+          icon: Icons.download_rounded,
+          isPrimary: false,
           hoverValue: cvController.isHoveringDownload,
           onTap: cvController.downloadCV,
-          border: Border.all(color: primaryColor, width: 1.5),
         ),
       ],
     );
@@ -422,45 +483,93 @@ class Home extends StatelessWidget {
 
   Widget _hoverableButton({
     required String text,
-    required Color bgColor,
-    required Color textColor,
+    required IconData icon,
+    required bool isPrimary,
     required RxBool hoverValue,
     required VoidCallback onTap,
-    Border? border,
   }) {
     return MouseRegion(
       onEnter: (_) => hoverValue.value = true,
       onExit: (_) => hoverValue.value = false,
       child: Obx(
-        () => AnimatedScale(
-          scale: hoverValue.value ? 1.08 : 1.0,
-          duration: const Duration(milliseconds: 200),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 250),
-            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 12),
-            decoration: BoxDecoration(
-              color: bgColor,
-              border: border,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow:
-                  hoverValue.value
-                      ? [
-                        BoxShadow(
-                          color: primaryColor.withValues(alpha: 0.5),
-                          blurRadius: 12,
-                          spreadRadius: 2,
-                        ),
-                      ]
-                      : [],
+        () {
+          final isHovered = hoverValue.value;
+          final isDark = !themeController.toggle.value;
+
+          return AnimatedScale(
+            scale: isHovered ? 1.05 : 1.0,
+            duration: const Duration(milliseconds: 180),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 13),
+              decoration: BoxDecoration(
+                gradient: isPrimary ? AppColors.brandGradient : null,
+                color:
+                    isPrimary
+                        ? null
+                        : (isDark
+                            ? Colors.white.withValues(alpha: 0.06)
+                            : Colors.black.withValues(alpha: 0.04)),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+                border: Border.all(
+                  color:
+                      isPrimary
+                          ? Colors.transparent
+                          : (isHovered
+                              ? AppColors.primary
+                              : (isDark ? Colors.white24 : Colors.black26)),
+                  width: 1.4,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color:
+                        isHovered
+                            ? AppColors.primary.withValues(alpha: 0.45)
+                            : (isPrimary
+                                ? AppColors.primary.withValues(alpha: 0.25)
+                                : Colors.transparent),
+                    blurRadius: isHovered ? 16 : 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: InkWell(
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onTap: onTap,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      icon,
+                      size: 16,
+                      color:
+                          isPrimary
+                              ? Colors.white
+                              : (isHovered
+                                  ? AppColors.primary
+                                  : (isDark ? Colors.white : Colors.black87)),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      text,
+                      style: TextStyle(
+                        color:
+                            isPrimary
+                                ? Colors.white
+                                : (isHovered
+                                    ? AppColors.primary
+                                    : (isDark ? Colors.white : Colors.black87)),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            child: InkWell(
-              highlightColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              onTap: onTap,
-              child: MyText(text: text, textColor: textColor),
-            ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -470,27 +579,40 @@ Widget buildIconContainer(
   BuildContext context,
   bool isLight,
   bool isHovered,
-  IconData icon,
+  dynamic icon,
   double size,
 ) {
+  final iconColor =
+      isLight ? const Color(0xFF2D1060) : const Color(0xFFEDE7FF);
+
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 11.5),
+    padding: const EdgeInsets.all(11),
     decoration: BoxDecoration(
       shape: BoxShape.circle,
-      color: isLight ? const Color(0xfffbf8ff) : const Color(0xff1f2937),
+      color: isLight ? Colors.white : const Color(0xFF1E293B),
+      border: Border.all(
+        color:
+            isHovered
+                ? AppColors.primary
+                : (isLight ? Colors.black12 : Colors.white12),
+        width: 1.2,
+      ),
       boxShadow: [
         BoxShadow(
           color:
               isHovered
-                  ? primaryColor.withValues(alpha: 0.6)
+                  ? AppColors.primary.withValues(alpha: 0.5)
                   : (isLight
-                      ? Colors.grey.withValues(alpha: 0.6)
-                      : Colors.black54.withValues(alpha: 0.6)),
-          blurRadius: 12,
+                      ? Colors.black.withValues(alpha: 0.05)
+                      : Colors.black.withValues(alpha: 0.3)),
+          blurRadius: 10,
           spreadRadius: 1,
         ),
       ],
     ),
-    child: Icon(icon, color: Theme.of(context).colorScheme.onPrimaryContainer),
+    child:
+        icon is FaIconData
+            ? FaIcon(icon, color: iconColor, size: size)
+            : Icon(icon as IconData, color: iconColor, size: size),
   );
 }

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/core/constants/app_dimensions.dart';
@@ -50,7 +51,12 @@ class Projects extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const ScrollReveal(
-            child: SectionHeader(title: AppStrings.navProjects),
+            child: SectionHeader(
+              eyebrow: "Featured Work",
+              title: "Production Projects & Systems",
+              subtitle:
+                  "Architecture deep-dives, production Play Store apps, and enterprise systems engineered in Flutter.",
+            ),
           ),
           const Gap(AppDimensions.spaceXL),
 
@@ -197,6 +203,7 @@ class _ProjectCardState extends State<ProjectCard> {
   Widget build(BuildContext context) {
     final isDark = !widget.themeController.toggle.value;
     final project = widget.project;
+    final NavigationController nav = Get.find<NavigationController>();
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -236,69 +243,248 @@ class _ProjectCardState extends State<ProjectCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Screenshot Header
-              Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(AppDimensions.radiusL),
-                      topRight: Radius.circular(AppDimensions.radiusL),
-                    ),
-                    child: AnimatedScale(
-                      scale: _isHovered ? 1.06 : 1.0,
-                      duration: const Duration(milliseconds: 250),
-                      child: Image.asset(
-                        project.image,
-                        height: 190,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
+              // Screenshot Header: 16:9.5 responsive ratio with full contain visibility (no clipping on any side)
+              InkWell(
+                onTap:
+                    () =>
+                        _showProjectArchitectureModal(context, project, isDark),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(AppDimensions.radiusL),
+                  topRight: Radius.circular(AppDimensions.radiusL),
+                ),
+                child: AspectRatio(
+                  aspectRatio: 16 / 9.5,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color:
+                          isDark
+                              ? const Color(0xFF0F172A)
+                              : const Color(0xFFF1F5F9),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(AppDimensions.radiusL),
+                        topRight: Radius.circular(AppDimensions.radiusL),
                       ),
+                    ),
+                    child: Stack(
+                      children: [
+                        // Fully contained image preserving all mockups & aspect ratios without cropping
+                        Center(
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(AppDimensions.radiusL),
+                              topRight: Radius.circular(AppDimensions.radiusL),
+                            ),
+                            child: Image.asset(
+                              project.image,
+                              width: double.infinity,
+                              height: double.infinity,
+                              fit: BoxFit.contain,
+                              filterQuality: FilterQuality.high,
+                            ),
+                          ),
+                        ),
+
+                        // Category Badge (Top Right)
+                        Positioned(
+                          top: 12,
+                          right: 12,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withValues(alpha: 0.72),
+                              borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusPill,
+                              ),
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: 0.25),
+                              ),
+                            ),
+                            child: Text(
+                              project.category,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        // Interactive Release / Source Badge (Top Left)
+                        if (project.playStoreUrl != null) ...[
+                          Positioned(
+                            top: 12,
+                            left: 12,
+                            child: InkWell(
+                              onTap:
+                                  () => nav.myLaunchUrl(project.playStoreUrl!),
+                              borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusPill,
+                              ),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 9,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF0F9D58),
+                                  borderRadius: BorderRadius.circular(
+                                    AppDimensions.radiusPill,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withValues(
+                                        alpha: 0.3,
+                                      ),
+                                      blurRadius: 6,
+                                    ),
+                                  ],
+                                ),
+                                child: const Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.googlePlay,
+                                      size: 10,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "Google Play",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ] else if (project.githubUrl != null) ...[
+                          Positioned(
+                            top: 12,
+                            left: 12,
+                            child: InkWell(
+                              onTap: () => nav.myLaunchUrl(project.githubUrl!),
+                              borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusPill,
+                              ),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 9,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF1E293B),
+                                  borderRadius: BorderRadius.circular(
+                                    AppDimensions.radiusPill,
+                                  ),
+                                  border: Border.all(color: Colors.white24),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withValues(
+                                        alpha: 0.3,
+                                      ),
+                                      blurRadius: 6,
+                                    ),
+                                  ],
+                                ),
+                                child: const Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.github,
+                                      size: 11,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "Open Source",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+
+                        // Interactive Hover Overlay (Architecture / Details affordance)
+                        AnimatedOpacity(
+                          opacity: _isHovered ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 200),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black.withValues(alpha: 0.25),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(AppDimensions.radiusL),
+                                topRight: Radius.circular(
+                                  AppDimensions.radiusL,
+                                ),
+                              ),
+                            ),
+                            child: Center(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                  vertical: 8,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withValues(alpha: 0.8),
+                                  borderRadius: BorderRadius.circular(
+                                    AppDimensions.radiusPill,
+                                  ),
+                                  border: Border.all(
+                                    color: AppColors.primary.withValues(
+                                      alpha: 0.8,
+                                    ),
+                                    width: 1.2,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.primary.withValues(
+                                        alpha: 0.4,
+                                      ),
+                                      blurRadius: 12,
+                                    ),
+                                  ],
+                                ),
+                                child: const Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.visibility_outlined,
+                                      color: Colors.white,
+                                      size: 15,
+                                    ),
+                                    Gap(6),
+                                    Text(
+                                      "View Architecture",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(AppDimensions.radiusL),
-                          topRight: Radius.circular(AppDimensions.radiusL),
-                        ),
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.black.withValues(alpha: 0.4),
-                            Colors.transparent,
-                          ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 12,
-                    right: 12,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.65),
-                        borderRadius: BorderRadius.circular(
-                          AppDimensions.radiusPill,
-                        ),
-                        border: Border.all(color: Colors.white24),
-                      ),
-                      child: Text(
-                        project.category,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
 
               // Content Details Body
@@ -317,11 +503,15 @@ class _ProjectCardState extends State<ProjectCard> {
                       const Gap(AppDimensions.spaceS),
 
                       Expanded(
-                        child: MyText(
-                          text: project.description,
-                          fontSize: 13,
-                          textColor: isDark ? Colors.white70 : Colors.black87,
-                          textAlign: TextAlign.justify,
+                        child: Text(
+                          project.description,
+                          maxLines: 4,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 13,
+                            height: 1.45,
+                            color: isDark ? Colors.white70 : Colors.black87,
+                          ),
                         ),
                       ),
                       const Gap(AppDimensions.spaceM),
@@ -330,32 +520,59 @@ class _ProjectCardState extends State<ProjectCard> {
                       Wrap(
                         spacing: 6,
                         runSpacing: 6,
-                        children:
-                            project.technologies.take(4).map((tech) {
-                              return Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 9,
-                                  vertical: 4,
+                        children: [
+                          ...project.technologies.take(4).map((tech) {
+                            return Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 9,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color:
+                                    isDark
+                                        ? AppColors.darkChipSurface
+                                        : AppColors.lightChipSurface,
+                                borderRadius: BorderRadius.circular(
+                                  AppDimensions.radiusPill,
                                 ),
-                                decoration: BoxDecoration(
-                                  color:
-                                      isDark
-                                          ? AppColors.darkChipSurface
-                                          : AppColors.lightChipSurface,
-                                  borderRadius: BorderRadius.circular(
-                                    AppDimensions.radiusPill,
+                              ),
+                              child: MyText(
+                                text: tech,
+                                fontSize: 11,
+                                textColor:
+                                    isDark ? Colors.grey[300] : Colors.black87,
+                              ),
+                            );
+                          }),
+                          if (project.technologies.length > 4)
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.primary.withValues(
+                                  alpha: 0.15,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  AppDimensions.radiusPill,
+                                ),
+                                border: Border.all(
+                                  color: AppColors.primary.withValues(
+                                    alpha: 0.35,
                                   ),
                                 ),
-                                child: MyText(
-                                  text: tech,
-                                  fontSize: 11,
-                                  textColor:
-                                      isDark
-                                          ? Colors.grey[300]
-                                          : Colors.black87,
+                              ),
+                              child: Text(
+                                "+${project.technologies.length - 4} more",
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.primary,
                                 ),
-                              );
-                            }).toList(),
+                              ),
+                            ),
+                        ],
                       ),
                       const Gap(AppDimensions.spaceL),
 

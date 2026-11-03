@@ -45,7 +45,10 @@ class About extends StatelessWidget {
         children: [
           const ScrollReveal(
             child: SectionHeader(
-              title: AppStrings.navAbout,
+              eyebrow: "About Me",
+              title: "Engineering Philosophy & Impact",
+              subtitle:
+                  "Building scalable cross-platform systems with architectural discipline, clean code, and user-centric design.",
               fontSize: AppDimensions.fontSectionMobile,
             ),
           ),
@@ -76,7 +79,14 @@ class About extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const ScrollReveal(child: SectionHeader(title: AppStrings.navAbout)),
+          const ScrollReveal(
+            child: SectionHeader(
+              eyebrow: "About Me",
+              title: "Engineering Philosophy & Impact",
+              subtitle:
+                  "Building scalable cross-platform systems with architectural discipline, clean code, and user-centric design.",
+            ),
+          ),
           const Gap(30),
           _buildMetricsGrid(context, crossAxisCount: 4, isMobile: false),
           const Gap(35),
@@ -104,7 +114,14 @@ class About extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const ScrollReveal(child: SectionHeader(title: AppStrings.navAbout)),
+          const ScrollReveal(
+            child: SectionHeader(
+              eyebrow: "About Me",
+              title: "Engineering Philosophy & Impact",
+              subtitle:
+                  "Building scalable cross-platform systems with architectural discipline, clean code, and user-centric design.",
+            ),
+          ),
           const Gap(35),
 
           // Top Recruiter Impact Metrics Banner
@@ -258,7 +275,39 @@ class About extends StatelessWidget {
           _buildBioParagraph(AppStrings.aboutParagraph2, isDark, isMobile),
           const Gap(14),
           _buildBioParagraph(AppStrings.aboutParagraph3, isDark, isMobile),
+          const Gap(20),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              _buildCorePill("🏗️ Clean Architecture", isDark),
+              _buildCorePill("⚡ Offline-First (Hive)", isDark),
+              _buildCorePill("🔄 BLoC / Cubit & Riverpod", isDark),
+              _buildCorePill("☁️ Supabase & gRPC", isDark),
+            ],
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCorePill(String text, bool isDark) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.darkChipSurface : AppColors.lightChipSurface,
+        borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+        border: Border.all(
+          color: AppColors.primary.withValues(alpha: 0.3),
+        ),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+          color: isDark ? Colors.white70 : Colors.black87,
+        ),
       ),
     );
   }

@@ -72,7 +72,8 @@ class ProjectLocalDataSourceImpl implements ProjectLocalDataSource {
       ],
       githubUrl: null,
       liveUrl: null,
-      playStoreUrl: "https://play.google.com/store/apps/details?id=com.tesseriq.tesseriq",
+      playStoreUrl:
+          "https://play.google.com/store/apps/details?id=com.tesseriq.tesseriq",
       architectureOverview:
           "Engineered with an Offline-First architectural pattern using Hive local key-value storage synchronized over gRPC bidirectional streams for sub-second driver location updates and trip logs.",
       keyMetrics: {
@@ -80,6 +81,41 @@ class ProjectLocalDataSourceImpl implements ProjectLocalDataSource {
         "State": "GetX",
         "Storage": "Hive Offline-First",
         "Sync Latency": "<100ms",
+      },
+    ),
+    ProjectModel(
+      id: 'ummati-app',
+      image: AppAssets.ummati,
+      title: "Ummati - Islamic Lifestyle & Utility Platform",
+      category: "Mobile App",
+      description:
+          "A beautifully crafted Islamic lifestyle and daily utility application built with Flutter, Riverpod, and Clean Architecture. Features real-time Qibla compass alignment with device magnetometer sensors, offline-first astronomical prayer calculations, local push notifications, and customizable daily utility tools.",
+      technologies: [
+        "Flutter",
+        "Dart",
+        "Riverpod",
+        "Clean Architecture",
+        "Sensors / Compass",
+        "Local Notifications",
+        "Hive",
+        "Material 3",
+      ],
+      highlights: [
+        "Architected robust reactive state management using Flutter Riverpod with Clean Architecture separation",
+        "Integrated device magnetometer & accelerometer sensors with smoothing filters for fluid real-time Qibla direction",
+        "Engineered 100% offline-first astronomical prayer time calculation engine with zero network dependency",
+        "Configured high-reliability local background notifications with timezone-aware scheduling",
+      ],
+      githubUrl: "https://github.com/mohammedkaif02/ummati",
+      liveUrl: null,
+      playStoreUrl: null,
+      architectureOverview:
+          "Engineered with Riverpod reactive providers and Clean Architecture separation. Employs device sensor streams with smoothing algorithms for real-time Qibla orientation, local Hive storage for settings, and background notification schedulers.",
+      keyMetrics: {
+        "State Engine": "Riverpod",
+        "Sensors": "Magnetometer / Qibla",
+        "Calculation": "100% On-Device",
+        "Storage": "Offline-First Hive",
       },
     ),
     ProjectModel(

@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:portfolio/core/di/app_binding.dart';
+import 'package:portfolio/core/binding/app_binding.dart';
 import 'package:portfolio/core/theme/my_theme_colors.dart';
 import 'package:portfolio/features/home/presentation/controllers/theme_controller.dart';
 import 'package:portfolio/features/home/presentation/views/home_screen.dart';

@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class NavigationController extends GetxController {
   final ScrollController scrollController = ScrollController();
-  
+
   RxString selectedNavItem = "Home".obs;
   RxString hoverNavItem = "".obs;
   RxBool isButtonVisible = false.obs;
@@ -44,7 +44,9 @@ class NavigationController extends GetxController {
       isButtonVisible.value = scrollController.offset > 100;
       final maxScroll = scrollController.position.maxScrollExtent;
       scrollProgress.value =
-          maxScroll > 0 ? (scrollController.offset / maxScroll).clamp(0.0, 1.0) : 0.0;
+          maxScroll > 0
+              ? (scrollController.offset / maxScroll).clamp(0.0, 1.0)
+              : 0.0;
     });
     scrollController.addListener(_onScroll);
   }
@@ -70,8 +72,9 @@ class NavigationController extends GetxController {
         key.currentContext?.findRenderObject() as RenderBox?;
     if (renderBox == null) return false;
 
-    double position = renderBox.localToGlobal(Offset.zero).dy;
-    return position >= 0 && position < 200;
+    final double position = renderBox.localToGlobal(Offset.zero).dy;
+    final double height = renderBox.size.height;
+    return position <= 250 && (position + height) > 150;
   }
 
   void scrollToSection(GlobalKey key, String section) {
@@ -101,13 +104,14 @@ class NavigationController extends GetxController {
   }
 
   void onEnter(bool hover) => isHovered.value = hover;
-  
+
   void setHover(int index, bool value) {
     if (index < hoverList.length) {
       hoverList[index] = value;
       update();
     }
   }
+
   void onEnter2(bool hover) => isHovered2.value = hover;
   void onMailEnter(bool hover) => isMailHovered.value = hover;
   void onGithubEnter(bool hover) => isGithubHovered.value = hover;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/core/constants/app_dimensions.dart';
-import 'package:portfolio/core/constants/app_strings.dart';
 import 'package:portfolio/core/theme/app_colors.dart';
 import 'package:portfolio/core/theme/theme_color.dart';
 import 'package:portfolio/core/widgets/my_text.dart';
@@ -48,7 +47,12 @@ class Experience extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const ScrollReveal(
-            child: SectionHeader(title: AppStrings.navExperience),
+            child: SectionHeader(
+              eyebrow: "Career Journey",
+              title: "Work Experience & Milestones",
+              subtitle:
+                  "Proven track record of taking mobile applications from concept through Figma to production release.",
+            ),
           ),
           Gap(
             width < AppDimensions.breakpointMobile
@@ -230,13 +234,22 @@ class _HoverExperienceCardState extends State<HoverExperienceCard> {
         duration: const Duration(milliseconds: 200),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
-          padding: EdgeInsets.all(isMobile ? 16 : 24),
+          padding: EdgeInsets.all(isMobile ? 18 : 24),
           decoration: BoxDecoration(
             color:
                 widget.themeController.toggle.value
                     ? Colors.white
                     : const Color(0xff1f2837),
             borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color:
+                  _isHovered
+                      ? primaryColor.withValues(alpha: 0.6)
+                      : (widget.themeController.toggle.value
+                          ? Colors.black.withValues(alpha: 0.06)
+                          : Colors.white.withValues(alpha: 0.08)),
+              width: 1.2,
+            ),
             boxShadow: [
               BoxShadow(
                 color:
@@ -245,7 +258,7 @@ class _HoverExperienceCardState extends State<HoverExperienceCard> {
                         : (widget.themeController.toggle.value
                             ? Colors.black.withValues(alpha: 0.05)
                             : Colors.black.withValues(alpha: 0.3)),
-                blurRadius: _isHovered ? 16 : 8,
+                blurRadius: _isHovered ? 18 : 8,
                 spreadRadius: _isHovered ? 2 : 0,
                 offset: const Offset(0, 4),
               ),
@@ -259,14 +272,61 @@ class _HoverExperienceCardState extends State<HoverExperienceCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: MyText(
-                      text: widget.item.role,
-                      fontSize: isMobile ? 18 : 22,
-                      fontWeight: FontWeight.bold,
-                      textColor:
-                          widget.themeController.toggle.value
-                              ? Colors.black
-                              : Colors.white,
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: MyText(
+                            text: widget.item.role,
+                            fontSize: isMobile ? 18 : 22,
+                            fontWeight: FontWeight.bold,
+                            textColor:
+                                widget.themeController.toggle.value
+                                    ? Colors.black
+                                    : Colors.white,
+                          ),
+                        ),
+                        if (widget.item.company.contains("Tesseriq")) ...[
+                          const Gap(10),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF10B981).withValues(
+                                alpha: 0.15,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusPill,
+                              ),
+                              border: Border.all(
+                                color: const Color(0xFF10B981).withValues(
+                                  alpha: 0.4,
+                                ),
+                              ),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.bolt_rounded,
+                                  size: 12,
+                                  color: Color(0xFF10B981),
+                                ),
+                                SizedBox(width: 3),
+                                Text(
+                                  "Sole Frontend Dev",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF10B981),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                   ),
                   const Gap(8),

@@ -49,7 +49,12 @@ class Contact extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const ScrollReveal(
-            child: SectionHeader(title: AppStrings.navContact),
+            child: SectionHeader(
+              eyebrow: "Let's Connect",
+              title: "Get In Touch",
+              subtitle:
+                  "Have a project in mind, an engineering role opening, or want to discuss Flutter architecture? Let's connect.",
+            ),
           ),
           const Gap(AppDimensions.spaceXL),
 
@@ -415,7 +420,7 @@ class Contact extends StatelessWidget {
 
   Widget _buildContactCard(
     BuildContext context, {
-    required IconData icon,
+    required dynamic icon,
     required String title,
     required String value,
     required int index,
@@ -483,7 +488,9 @@ class Contact extends StatelessWidget {
                               : [],
                     ),
                     padding: const EdgeInsets.all(14.0),
-                    child: Icon(icon, color: Colors.white, size: 24),
+                    child: icon is FaIconData
+                        ? FaIcon(icon, color: Colors.white, size: 24)
+                        : Icon(icon as IconData, color: Colors.white, size: 24),
                   ),
                   const Gap(AppDimensions.spaceM),
                   MyText(

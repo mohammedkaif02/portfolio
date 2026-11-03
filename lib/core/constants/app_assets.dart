@@ -15,6 +15,11 @@ class AppAssets {
   static const String bloc = 'assets/icons/bloc.png';
   static const String nodejs = 'assets/icons/nodejs.png';
   static const String api = 'assets/icons/api.png';
+  static const String supabase = 'assets/icons/supabase.png';
+  static const String flutterflow = 'assets/icons/flutterflow.png';
+  static const String graphql = 'assets/icons/graphql.png';
+  static const String riverpod = 'assets/icons/riverpod.png';
+  static const String grpc = 'assets/icons/grpc.png';
   static const String firebase = 'assets/icons/firebase.png';
   static const String google = 'assets/icons/google.png';
   static const String postgresql = 'assets/icons/postgresql.png';
@@ -37,4 +42,8 @@ class AppAssets {
       'assets/Project_Image/restasmart_website.png';
   static const String karsAdmin = 'assets/Project_Image/kars_admin.png';
   static const String karsWebsite = 'assets/Project_Image/kars_website.png';
+  static const String ummati = 'assets/Project_Image/ummati.png';
+  static const String smartMasjid = 'assets/Project_Image/smart_masjid.png';
+  static const String inventoryManagement =
+      'assets/Project_Image/inventory_management.png';
 }

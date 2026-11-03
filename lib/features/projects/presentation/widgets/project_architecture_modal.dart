@@ -51,11 +51,17 @@ class ProjectArchitectureModal extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  Image.asset(
-                    project.image,
-                    height: isMobile ? 180 : 240,
+                  Container(
                     width: double.infinity,
-                    fit: BoxFit.cover,
+                    color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF1F5F9),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Image.asset(
+                        project.image,
+                        width: double.infinity,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   ),
                   Positioned.fill(
                     child: Container(

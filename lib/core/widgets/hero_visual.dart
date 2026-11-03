@@ -20,10 +20,12 @@ class _HeroVisualState extends State<HeroVisual> with TickerProviderStateMixin {
   static const _techIcons = [
     {'icon': AppAssets.flutter, 'label': 'Flutter'},
     {'icon': AppAssets.dart, 'label': 'Dart'},
-    {'icon': AppAssets.getx, 'label': 'GetX'},
+    {'icon': AppAssets.bloc, 'label': 'BLoC & Cubit'},
+    {'icon': AppAssets.riverpod, 'label': 'Riverpod'},
+    {'icon': AppAssets.supabase, 'label': 'Supabase'},
+    {'icon': AppAssets.flutterflow, 'label': 'FlutterFlow'},
     {'icon': AppAssets.firebase, 'label': 'Firebase'},
-    {'icon': AppAssets.figma, 'label': 'Figma'},
-    {'icon': AppAssets.github, 'label': 'GitHub'},
+    {'icon': AppAssets.github, 'label': 'GitHub & CI/CD'},
   ];
 
   @override
@@ -31,7 +33,7 @@ class _HeroVisualState extends State<HeroVisual> with TickerProviderStateMixin {
     super.initState();
     _orbitController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 22),
+      duration: const Duration(seconds: 24),
     )..repeat();
 
     _pulseController = AnimationController(
@@ -138,35 +140,39 @@ class _TechBubbleState extends State<_TechBubble> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      child: AnimatedScale(
-        scale: _isHovered ? 1.25 : 1.0,
-        duration: const Duration(milliseconds: 180),
-        child: Container(
-          width: 48,
-          height: 48,
-          padding: const EdgeInsets.all(9),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: const Color(0xFF1F2937),
-            border: Border.all(
-              color: _isHovered ? AppColors.primary : Colors.white24,
-              width: 1.5,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color:
-                    _isHovered
-                        ? AppColors.primary.withValues(alpha: 0.6)
-                        : AppColors.primary.withValues(alpha: 0.25),
-                blurRadius: _isHovered ? 16 : 10,
-                offset: const Offset(0, 4),
+    return Tooltip(
+      message: widget.label,
+      waitDuration: const Duration(milliseconds: 200),
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        child: AnimatedScale(
+          scale: _isHovered ? 1.25 : 1.0,
+          duration: const Duration(milliseconds: 180),
+          child: Container(
+            width: 48,
+            height: 48,
+            padding: const EdgeInsets.all(9),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: const Color(0xFF1F2937),
+              border: Border.all(
+                color: _isHovered ? AppColors.primary : Colors.white24,
+                width: 1.5,
               ),
-            ],
+              boxShadow: [
+                BoxShadow(
+                  color:
+                      _isHovered
+                          ? AppColors.primary.withValues(alpha: 0.6)
+                          : AppColors.primary.withValues(alpha: 0.25),
+                  blurRadius: _isHovered ? 16 : 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Image.asset(widget.iconPath, fit: BoxFit.contain),
           ),
-          child: Image.asset(widget.iconPath, fit: BoxFit.contain),
         ),
       ),
     );
